@@ -4,6 +4,9 @@ body {
   padding: 0;
   line-height: 21px;
 }
+html, body, #root, .App {
+  min-height: 100vh;
+}
 
 .logo {
   background: url("images/shortcut-icon.png") no-repeat center/cover;
@@ -27,29 +30,34 @@ header {
   width: 100%;
   top: 0;
   background-color: #ffffff;
+  z-index: 9999;
 }
 
 .mainandfooter {
   background-image: linear-gradient(#ffffff, #284a94);
+  margin-top: 54px;
 }
 
 .About {
-  margin: 4em 9em 7em 9em;
+  margin: 7em 9em 7em 9em;
 }
 
 .Faq {
-  margin: 4em 9em 7em 9em;
+  margin: 7em 9em 7em 9em;
 }
 
 .Features {
-  margin: 4em 9em 7em 9em;
+  margin: 7em 9em 7em 9em;
 }
 
-.filterthenewsyouneed {
-  background: url("./images/filterthenewsyouneed.png") no-repeat;
+.Support {
+  margin: 7em 9em 27em 9em;
+  text-align: center;
 }
 
-
+.Support input {
+  width: 30em;
+}
 
 .nav-bar {
   color: black;
@@ -61,10 +69,9 @@ header {
   overflow: hidden;
   box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
 }
-
-#currentlyOn {
+ .active {
   border-bottom: 3px solid #fc284b;
-  color: #fc284b;
+  color: #fc284b!important;
 }
 
 .donate-button {
@@ -170,14 +177,21 @@ footer {
 }
 
 #download-card {
+  display: grid;
+  grid-template-columns: 30% 70%;
   color: white;
   justify-self: center;
   width: 80%;
-  margin-top: 3em;
+  margin-top: 5em;
   padding: 3em;
   border: 2px solid gray;
   border-radius: 8px;
   background-image: linear-gradient(#445d91, #54668f);
+}
+
+#download-card img {
+  width: 13em;
+  height: 13em;
 }
 
 .download-button {
@@ -185,7 +199,7 @@ footer {
 	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
 	background-color:#599bb3;
 	border-radius:8px;
-	display:inline-block;
+  display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
@@ -193,7 +207,8 @@ footer {
 	font-weight:bold;
 	padding:13px 32px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #3d768a;
+  text-shadow:0px 1px 0px #3d768a;
+  margin-top: 1em;
 }
 
 .download-button:hover {
