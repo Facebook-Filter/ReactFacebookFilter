@@ -33,9 +33,23 @@ header {
   background-image: linear-gradient(#ffffff, #284a94);
 }
 
-main {
-  margin: 7em 9em 7em 9em;
+.About {
+  margin: 4em 9em 7em 9em;
 }
+
+.Faq {
+  margin: 4em 9em 7em 9em;
+}
+
+.Features {
+  margin: 4em 9em 7em 9em;
+}
+
+.filterthenewsyouneed {
+  background: url("./images/filterthenewsyouneed.png") no-repeat;
+}
+
+
 
 .nav-bar {
   color: black;
