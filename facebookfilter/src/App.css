@@ -1,37 +1,6 @@
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  line-height: 21px;
-}
-html, body, #root, .App {
-  min-height: 100vh;
-}
 
-.logo {
-  background: url("images/shortcut-icon.png") no-repeat center/cover;
-  border-radius: 5px;
-  display: flex;
-  width: 2em;
-  height: 2em;
-}
 
-.logo:active {
-  position:relative;
-	top:1px;
-}
 
-.logo-div {
-  align-self: center;
-}
-
-header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background-color: #ffffff;
-  z-index: 9999;
-}
 
 .mainandfooter {
   background-image: linear-gradient(#ffffff, #284a94);
@@ -59,16 +28,6 @@ header {
   width: 30em;
 }
 
-.nav-bar {
-  color: black;
-  font-weight: normal;
-  display: flex;
-  flex-direction: row;
-  white-space: nowrap;
-  justify-content: space-evenly;
-  overflow: hidden;
-  box-shadow: 0 5px 10px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
-}
  .active {
   border-bottom: 3px solid #fc284b;
   color: #fc284b!important;
@@ -83,13 +42,6 @@ header {
 	top:1px;
 }
 
-.nav-bar > a {
-  display: inline-block;
-  color: black;
-  text-align: center;
-  padding: 15px;
-  text-decoration: none;
-}
 
 .nav-bar > a:hover {
   border-bottom: 3px solid #fa405f;
@@ -219,4 +171,9 @@ footer {
 .download-button:active {
   position:relative;
 	top:1px;
+}
+
+
+.App{
+  height:100%;
 }
