@@ -1,0 +1,26 @@
+{
+  "name": "reactfacebookfilter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "proxy": "http://localhost:5000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Facebook-Filter/ReactFacebookFilter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Facebook-Filter/ReactFacebookFilter/issues"
+  },
+  "homepage": "https://github.com/Facebook-Filter/ReactFacebookFilter#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}

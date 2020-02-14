@@ -1,12 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-
-
-class Footer extends Component{
-  render(){
-    return(
-        <footer>© 2020 www.socialmasters.com - All rights reserved.</footer>
-    )
+class Footer extends Component {
+  render() {
+    return <footer>© 2020 www.socialmasters.com - All rights reserved.</footer>;
   }
 }
 
