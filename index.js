@@ -106,6 +106,52 @@ app.get('/faq', async(req,res)=>{
   res.json(faq);
 })
 
+app.get("/faq/add", async (req, res) => {
+  const question = req.query.question;
+  const answer = req.query.answer;
+
+  let errors = [];
+  if (question == "" || answer == "") {
+    errors.push({
+      status: 403,
+      error: true,
+      message:
+        "you cannot create a faq without providing a question and answer"
+    });
+  }
+
+  if (errors.length > 0) {
+    res.json({ status: 403, error: true, message: errors });
+  } else {
+    try {
+      const addFaq = await controller.addFaq({ question, answer });
+      res.json({ id: addFaq, question: question, answer: answer });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  }
+});
+
+app.get("/faq/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deleteFaq = await controller.deleteFaq(id);
+    res.json({ deleteFaq });
+  } catch (e) {
+    res.json({ status: 403, error: true, message: e.message });
+  }
+});
+app.get("/faq/update/:faqID", async (req, res) => {
+  const faqID = req.params.faqID;
+  const {question, answer}=req.query;
+  try {
+    const updateFaq = await controller.updateFaq(faqID,{ question, answer });
+    res.json({ updateFaq });
+  } catch (e) {
+    res.json({ status: 403, error: true, message: e.message });
+  }
+});
+
 }
 app.listen(PORT, () => 
   console.log(`Server running at: http://localhost:${PORT}/`)

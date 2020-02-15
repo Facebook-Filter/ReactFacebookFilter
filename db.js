@@ -105,6 +105,65 @@ const initializeDB = async () => {
         return faq;
     }
 
+    const addFaq = async props=>{
+        const {question, answer} = props;
+        if(!props || !question || !answer){
+            throw new Error('you must provide a question and an answer');
+        }
+        try{
+        const addFaq= await db.run(`Insert into faqs (question, answer) values ('${question}', '${answer}')`);
+        return addFaq.stmt.lastID;
+    }
+    catch(err) {
+        err.message;
+        console.log(err.message);
+        throw new Error('this combination doesnt work');
+    }};
+    
+    const updateFaq = async (faqID,props)=>{
+        const {question, answer} = props;
+        console.log("here")
+        if(!props || !props.question && !props.answer){
+            throw new Error('you must provide a question and an answer');
+        }
+        let stmt='';
+        if (question && answer){
+            stmt=`update faqs set question='${question}', answer='${answer}' where faqID= ${faqID}`;
+            console.log(stmt);
+        }
+        else if(question && !answer){
+            stmt=`update faqs set question='${question}' where faqID= ${faqID}`;
+        }
+    
+        else if(answer && !question){
+            stmt= `update faqs set answer='${answer}' where faqID= ${faqID}`;
+        }
+    
+        try{
+        const updateFaq = await db.run(stmt);
+        console.log(updateFaq);
+        if (updateFaq.stmt.changes == 0){
+            throw new Error(`faq with faqID ${faqID} doesnt exist`);
+        }
+    
+        return true;
+    }
+    catch(err) {
+        
+        throw new Error(`Could not update faq with faqID= ${faqID}` + err);
+    }};
+    
+    const deleteFaq = async(faqID)=>{
+        try{
+        const deleteFaq= await db.run(`Delete from faqs where faqID =${faqID}`);
+        return deleteFaq;
+    }
+    catch(err) {
+        err.message;
+        console.log(err.message);
+        throw new Error('this combination doesnt work');
+    }};
+
 
     const controller = {
         getReviews,
@@ -114,7 +173,10 @@ const initializeDB = async () => {
         addUser,
         deleteUser,
         updateUser,
-        getFaq
+        getFaq,
+        deleteFaq,
+        addFaq,
+        updateFaq
 
     }
     return controller;
