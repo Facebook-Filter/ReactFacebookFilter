@@ -1,3 +1,7 @@
+body{
+  font-family: sans-serif;
+}
+
 .mainandfooter {
   background-image: linear-gradient(#ffffff, #284a94);
   margin-top: 54px;
@@ -36,10 +40,6 @@
 .donate-button:active {
   position: relative;
   top: 1px;
-}
-
-.nav-bar > a:hover {
-  border-bottom: 3px solid #fa405f;
 }
 
 footer {
