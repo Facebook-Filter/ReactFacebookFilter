@@ -252,9 +252,9 @@ const initializeDB = async () => {
     }};
  
     
-    const deleteContacts = async(revID)=>{
+    const deleteContacts = async(contID)=>{
         try{
-        const deleteContacts= await db.run(`Delete from reviews where revID =${revID}`);
+        const deleteContacts= await db.run(`Delete from contacts where contID =${contID}`);
         return deleteContacts;
     }
     catch(err) {
