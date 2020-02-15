@@ -165,6 +165,71 @@ const initializeDB = async () => {
     }};
 
 
+    const getSupport= async()=>{
+        const support= await db.all('Select * from supports');
+        return support;
+    }
+
+    const addSupport = async props=>{
+        const {email, question} = props;
+        if(!props || !email || !question){
+            throw new Error('you must provide a question and an email');
+        }
+        try{
+        const addSupport= await db.run(`Insert into supports (email, question) values ('${email}', '${question}')`);
+        return addSupport.stmt.lastID;
+    }
+    catch(err) {
+        err.message;
+        console.log(err.message);
+        throw new Error('this combination doesnt work');
+    }};
+    
+    const updateSupport = async (questID,props)=>{
+        const {email, question} = props;
+        console.log("here")
+        if(!props || !props.email && !props.question){
+            throw new Error('you must provide a username and password');
+        }
+        let stmt='';
+        if (email && question){
+            stmt=`update supports set email='${email}', question='${question}' where questID= ${questID}`;
+            console.log(stmt);
+        }
+        else if(email && !question){
+            stmt=`update supports set email='${email}' where questID= ${questID}`;
+        }
+    
+        else if(question && !email){
+            stmt= `update supports set question='${question}' where questID= ${questID}`;
+        }
+    
+        try{
+        const updateSupport = await db.run(stmt);
+        console.log(updateSupport);
+        if (updateSupport.stmt.changes == 0){
+            throw new Error(`users with questID ${questID} doesnt exist`);
+        }
+    
+        return true;
+    }
+    catch(err) {
+        
+        throw new Error(`Could not update supports with questID= ${questID}` + err);
+    }};
+    
+    const deleteSupport= async(questID)=>{
+        try{
+        const deleteSupport= await db.run(`Delete from supports where questID =${questID}`);
+        return deleteSupport;
+    }
+    catch(err) {
+        err.message;
+        console.log(err.message);
+        throw new Error('this combination doesnt work');
+    }};
+
+
     const controller = {
         getReviews,
         addReview,
@@ -176,7 +241,11 @@ const initializeDB = async () => {
         getFaq,
         deleteFaq,
         addFaq,
-        updateFaq
+        updateFaq,
+        getSupport,
+        addSupport,
+        updateSupport,
+        deleteSupport,
 
     }
     return controller;

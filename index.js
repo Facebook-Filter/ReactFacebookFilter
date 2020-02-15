@@ -125,17 +125,17 @@ app.get("/faq/add", async (req, res) => {
   } else {
     try {
       const addFaq = await controller.addFaq({ question, answer });
-      res.json({ id: addFaq, question: question, answer: answer });
+      res.json({ faqID: addFaq, question: question, answer: answer });
     } catch (e) {
       res.json({ status: 403, error: true, message: e.message });
     }
   }
 });
 
-app.get("/faq/delete/:id", async (req, res) => {
-  const id = req.params.id;
+app.get("/faq/delete/:faqID", async (req, res) => {
+  const faqID = req.params.faqID;
   try {
-    const deleteFaq = await controller.deleteFaq(id);
+    const deleteFaq = await controller.deleteFaq(faqID);
     res.json({ deleteFaq });
   } catch (e) {
     res.json({ status: 403, error: true, message: e.message });
@@ -147,6 +147,58 @@ app.get("/faq/update/:faqID", async (req, res) => {
   try {
     const updateFaq = await controller.updateFaq(faqID,{ question, answer });
     res.json({ updateFaq });
+  } catch (e) {
+    res.json({ status: 403, error: true, message: e.message });
+  }
+});
+
+app.get('/support', async(req,res)=>{
+  const support=await controller.getSupport();
+  res.json(support);
+})
+
+
+app.get("/support/add", async (req, res) => {
+  const email = req.query.email;
+  const question = req.query.question;
+
+  let errors = [];
+  if (email == "" || question == "") {
+    errors.push({
+      status: 403,
+      error: true,
+      message:
+        "you cannot create a support without providing a question and email"
+    });
+  }
+
+  if (errors.length > 0) {
+    res.json({ status: 403, error: true, message: errors });
+  } else {
+    try {
+      const addSupport = await controller.addSupport({ email, question });
+      res.json({ questID: addSupport, email: email, question: question });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  }
+});
+
+app.get("/support/delete/:questID", async (req, res) => {
+  const questID = req.params.questID;
+  try {
+    const deleteSupport = await controller.deleteSupport(questID);
+    res.json({ deleteSupport });
+  } catch (e) {
+    res.json({ status: 403, error: true, message: e.message });
+  }
+});
+app.get("/support/update/:questID", async (req, res) => {
+  const questID = req.params.questID;
+  const {email, question}=req.query;
+  try {
+    const updateSupport = await controller.updateSupport(questID,{ email, question });
+    res.json({ updateSupport });
   } catch (e) {
     res.json({ status: 403, error: true, message: e.message });
   }
