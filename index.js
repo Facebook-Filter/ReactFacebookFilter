@@ -84,7 +84,7 @@ app.get("/review/add", async (req, res) => {
   } else {
     try {
       const addReview = await controller.addReview({ username, email, review });
-      res.json({ id: addReview, username: username, email: email, review:review });
+      res.json({ revID: addReview, username: username, email: email, review:review });
     } catch (e) {
       res.json({ status: 403, error: true, message: e.message });
     }
@@ -92,9 +92,9 @@ app.get("/review/add", async (req, res) => {
 });
 
 app.get("/review/delete/:id", async (req, res) => {
-  const id = req.params.id;
+  const revID = req.params.revID;
   try {
-    const deleteReview = await controller.deleteReview(id);
+    const deleteReview = await controller.deleteReview(revID);
     res.json({ deleteReview });
   } catch (e) {
     res.json({ status: 403, error: true, message: e.message });
@@ -203,6 +203,54 @@ app.get("/support/update/:questID", async (req, res) => {
     res.json({ status: 403, error: true, message: e.message });
   }
 });
+
+
+
+
+
+app.get("/contacts", async(req, res) => {
+  const contacts = await controller.getContacts();
+    res.json(contacts);
+});
+
+app.get("/contacts/add", async (req, res) => {
+  const nameChosen = req.query.nameChosen;
+  const email = req.query.email;
+  const message=req.query.message;
+
+  let errors = [];
+  if (nameChosen == "" || email == "" || message=='') {
+    errors.push({
+      status: 403,
+      error: true,
+      message:
+        "you cannot create a contact us without providing a nameChosen, email and message"
+    });
+  }
+
+  if (errors.length > 0) {
+    res.json({ status: 403, error: true, message: errors });
+  } else {
+    try {
+      const addContacts = await controller.addContacts({ nameChosen, email, message });
+      res.json({ contID: addContacts, nameChosen: nameChosen, email: email, message:message });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  }
+});
+
+app.get("/contacts/delete/:contID", async (req, res) => {
+  const contID = req.params.contID;
+  try {
+    const deleteContacts = await controller.deleteContacts(contID);
+    res.json({ deleteContacts });
+  } catch (e) {
+    res.json({ status: 403, error: true, message: e.message });
+  }
+});
+
+
 
 }
 app.listen(PORT, () => 

@@ -88,9 +88,9 @@ const initializeDB = async () => {
     }};
  
     
-    const deleteReview = async(id)=>{
+    const deleteReview = async(revID)=>{
         try{
-        const deleteReview= await db.run(`Delete from reviews where id =${id}`);
+        const deleteReview= await db.run(`Delete from reviews where revID =${revID}`);
         return deleteReview;
     }
     catch(err) {
@@ -230,6 +230,40 @@ const initializeDB = async () => {
     }};
 
 
+
+    const getContacts= async()=>{
+        const contacts= await db.all('Select * from contacts');
+        return contacts;
+    }
+
+    const addContacts = async props=>{
+        const {nameChosen, email, message} = props;
+        if(!props || !nameChosen || !email || !message){
+            throw new Error('you must provide a name, email & message');
+        }
+        try{
+        const addContacts= await db.run(`Insert into contacts (nameChosen, email, message) values ('${nameChosen}', '${email}', '${message}')`);
+        return addContacts.stmt.lastID;
+    }
+    catch(err) {
+        err.message;
+        console.log(err.message);
+        throw new Error('this combination doesnt work');
+    }};
+ 
+    
+    const deleteContacts = async(revID)=>{
+        try{
+        const deleteContacts= await db.run(`Delete from reviews where revID =${revID}`);
+        return deleteContacts;
+    }
+    catch(err) {
+        err.message;
+        console.log(err.message);
+        throw new Error('this combination doesnt work');
+    }};
+
+
     const controller = {
         getReviews,
         addReview,
@@ -246,7 +280,9 @@ const initializeDB = async () => {
         addSupport,
         updateSupport,
         deleteSupport,
-
+        getContacts,
+        addContacts,
+        deleteContacts
     }
     return controller;
 
