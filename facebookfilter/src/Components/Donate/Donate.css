@@ -1,0 +1,48 @@
+.Donate{
+margin-top:0%;
+margin-left:10%;
+}
+
+#validation-form{
+    margin-top: 10%;
+  }
+
+  #text-name{
+    width: 300px;
+  }
+
+  #text-email{
+    width: 300px;
+  }
+
+  .donate_textarea{
+    position: relative;
+    margin-top: -15px;
+  }
+
+  #give-btn{
+    width: 310px;
+    height: 30px;
+    color: white;
+    background-color:rgb(30, 139, 30)
+  }
+
+  .fb-donation{
+    width:30em;
+    height: 580px;
+    opacity: 70%;
+    border: 0px;
+  }
+
+  .validation-fbPhoto{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 180px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 15%;
+  }
+
+
+
+ 
