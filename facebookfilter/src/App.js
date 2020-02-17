@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Nav from './Components/Nav/Nav';
@@ -16,10 +17,11 @@ import './index-1.css';
 import './index-2.css';
 
 
-class App extends Component{
+
+class App extends Component {
 
   render(){
-    return( <>
+    return(
       <Router>
       <div className="App">
       <Nav/>
@@ -41,10 +43,8 @@ class App extends Component{
       </div>
       </div>
       </Router>
-      </>
       
     );
-    
   }
 }
 
