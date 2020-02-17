@@ -91,7 +91,7 @@ app.get("/review/add", async (req, res) => {
   }
 });
 
-app.get("/review/delete/:id", async (req, res) => {
+app.get("/review/delete/:revID", async (req, res) => {
   const revID = req.params.revID;
   try {
     const deleteReview = await controller.deleteReview(revID);

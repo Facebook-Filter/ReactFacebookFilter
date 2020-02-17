@@ -14,7 +14,7 @@ class Download extends Component {
           technical details and how they are packaged specifically for each
           browser.
         </p>
-        <div class="browser-logos">
+        <div className="browser-logos">
           <Link className="firefox-logo" to="/"></Link>
           <Link className="chrome-logo" to="/"></Link>
           <Link className="safari-logo" to="/"></Link>

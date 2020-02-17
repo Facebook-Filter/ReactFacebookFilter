@@ -46,7 +46,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Hide "Sponsored" Stories (Ads) <span class="red">(Featured)</span>
+          Hide "Sponsored" Stories (Ads) <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={HideAds} alt="hide ads" />
