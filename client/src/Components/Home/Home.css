@@ -1,0 +1,23 @@
+.Home{
+    display: flex;
+    flex-direction: row;
+}
+
+.Slider{
+    width: 500px;
+}
+
+.Rating{
+    display: flex;
+    flex-direction: column;
+    margin-left: 300px;
+}
+
+.stars{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.stars p{
+    margin-left: 50px;
+}
