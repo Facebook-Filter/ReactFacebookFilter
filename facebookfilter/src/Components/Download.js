@@ -36,6 +36,24 @@ class Download extends Component {
                 <b>How to update Firefox extensions manually</b>.
               </Link>
             </p>
+<<<<<<< HEAD
+            <div className="browser-logos">
+                <Link className="firefox-logo" to="/"></Link>
+                <Link className="chrome-logo" to="/"></Link>
+                <Link className="safari-logo" to="/"></Link>
+                <Link className="opera-logo" to="/"></Link>
+                <Link className="edge-logo" to="/"></Link>
+            </div>
+            <div id="download-card">
+                <div class="firefox-logo"></div>
+                <h2>Download Social Fixer for Firefox</h2>
+                <p>Click to install the extension from the official Mozilla Firefox Add-Ons site. <br/>
+                    <b>Are You Upgrading?</b> Firefox will update automatically every 24 hours or less. The "Download" page may not show you the latest version. To update Social Fixer manually, see:<br/>
+                    <Link to="/"><b>How to update Firefox extensions manually</b>.</Link>
+                </p>
+                <Link className="download-button" to="/" target="_blank" type="button" >Download</Link>
+            </div>
+=======
             <Link
               className="download-button"
               to=""
@@ -46,6 +64,7 @@ class Download extends Component {
             </Link>
           </div>
         </div>
+>>>>>>> d68d35b61436a500e09f216264e391cc0b7a51d6
       </div>
     );
   }
