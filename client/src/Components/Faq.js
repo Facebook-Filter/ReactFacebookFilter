@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-// import React, {Component} from 'react';
-
-
-
-// class Faq extends Component{
-//   render(){
-//     return(
-//       <div className="Faq">
-      
-//         <h2>Faq</h2>
-//       </div>
-//     )
-//   }
-// }
-
-// export default Faq;
-=======
 import React, { Component } from "react";
 
 class Faq extends Component {
@@ -144,4 +126,3 @@ class Faq extends Component {
 }
 
 export default Faq;
->>>>>>> d68d35b61436a500e09f216264e391cc0b7a51d6
