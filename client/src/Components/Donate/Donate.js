@@ -8,7 +8,7 @@ class Donate extends Component {
     return (
         <div className="validation-fbPhoto">
           <div className="Donate">
-            <form name="myForm" id="validation-form" onsubmit="return validateForm()" method="post">
+            <form name="myForm" id="validation-form" onSubmit="return validateForm()" method="post">
               Your name: <br/><input type="text" placeholder="Enter your name here.. " id="text-name"
                                      required/><br/><br/>
               Your email address: <br/><input type="text" placeholder="Enter your email here.."

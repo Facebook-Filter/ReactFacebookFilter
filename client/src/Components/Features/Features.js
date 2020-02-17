@@ -21,7 +21,6 @@ class Features extends Component{
   render(){
     return(    <>
       <div className="Features">
-        <h2>Features</h2>
         <div>
         <div className="features-intro">
           <h1 id="features-h1">Features</h1>
@@ -66,7 +65,7 @@ class Features extends Component{
           </div>
           <div className="feature-p4">
             <p id="p4-size">
-            </p><h2 id="f4-h2">Hide Politics (Featured)</h2> 
+            </p><h2 id="f4-h2">Hide Politics (Featured)</h2>
             Another pre-made filter you can click to add filters posts related to the 2016 U.S. Election and Politics. One click removes all the political junk from your news feed, so you can stay friends with people without seeing their political opinions.
             <p />
           </div>
@@ -88,7 +87,7 @@ class Features extends Component{
           </div>
           <div className="feature-p6">
             <p id="p6-size">
-            </p><h2 id="f6-h2">Show Photo Tags</h2> 
+            </p><h2 id="f6-h2">Show Photo Tags</h2>
             When photos are posted, Facebook automatically runs its AI to identify keywords in the photo. Social Fixer can expose these tags and show them to you when you hover over photos.
             <p />
           </div>
@@ -110,7 +109,7 @@ class Features extends Component{
           </div>
           <div className="feature-p8">
             <p id="p8-size">
-            </p><h2 id="f8-h2">Display Tweaks (Featured)</h2> 
+            </p><h2 id="f8-h2">Display Tweaks (Featured)</h2>
             Change the User Interface of Facebook, from colors to fonts to sizes or anything else you want to do using custom CSS rules. If you don't know how to do this, don't worry - there's a list of tweaks to pick from, and it will keep growing as new customization options are added to Social Fixer.
             <p />
           </div>
@@ -131,7 +130,7 @@ class Features extends Component{
           </div>
           <div className="feature-p10">
             <p id="p10-size">
-            </p><h2 id="f10-h2">Enhance Trending Stories</h2> 
+            </p><h2 id="f10-h2">Enhance Trending Stories</h2>
             Add more functionality to the Trending box by displaying summary headlines (without hovering) and adding bars that show the relative popularity of each story.                    <p />
           </div>
         </div>
@@ -151,7 +150,7 @@ class Features extends Component{
           </div>
           <div className="feature-p12">
             <p id="p12-size">
-            </p><h2 id="f12-h2">Anonymize For Screenshots</h2> 
+            </p><h2 id="f12-h2">Anonymize For Screenshots</h2>
             If you want to post a screenshot of your screen somewhere like Reddit but you don't want to reveal your name, your friends' names, their pictures, etc, then the "Anonymize Screen" function will help. It replaces all names, profile pictures, and other identifiers with generated text, making it a one-step process to scrub your screen before taking a screenshot.
             <p />
           </div>

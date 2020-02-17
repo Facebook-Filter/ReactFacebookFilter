@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
 class Download extends Component {
   render() {
     return (
@@ -19,7 +18,7 @@ class Download extends Component {
             <Link className="edge-logo" to="/"></Link>
           </div>
           <div id="download-card">
-            <div class="firefox-logo"></div>
+            <div className="firefox-logo"></div>
             <h2>Download Social Fixer for Firefox</h2>
             <p>Click to install the extension from the official Mozilla Firefox Add-Ons site. <br/>
               <b>Are You Upgrading?</b> Firefox will update automatically every 24 hours or less. The "Download" page

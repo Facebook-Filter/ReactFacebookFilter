@@ -9,8 +9,8 @@ class Home extends Component {
     
     const images = [
       {
-        original: {Image1},
-        thumbnail: {Image1},
+        original: Image1,
+        thumbnail: Image1,
       },
       {
         original: 'https://picsum.photos/id/1015/1000/600/',

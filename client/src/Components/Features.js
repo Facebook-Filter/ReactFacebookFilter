@@ -58,7 +58,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Hide Politics <span class="red">(Featured)</span>
+          Hide Politics <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={HidePolitics} alt="hide politics" />
@@ -70,7 +70,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Hide Posts You've Already Read <span class="red">(Featured)</span>
+          Hide Posts You've Already Read <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={HidePostsYouveSeen} alt="hide the posts you've seen" />
@@ -103,7 +103,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Display Tweaks <span class="red">(Featured)</span>
+          Display Tweaks <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={DisplayTweaks} alt="display tweaks" />
@@ -116,7 +116,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Stay On The Most Recent Feed <span class="red">(Featured)</span>
+          Stay On The Most Recent Feed <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={MostRecentFeed} alt="most recent feed" />
@@ -138,7 +138,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Stealth Mode <span class="red">(Featured)</span>
+          Stealth Mode <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={StealthMode} alt="stealth mode" />
@@ -163,7 +163,7 @@ class Features extends Component {
           </p>
         </div>
         <h2 className="feature">
-          Data Export/Import <span class="red">(Featured)</span>
+          Data Export/Import <span className="red">(Featured)</span>
         </h2>
         <div className="feature-grid">
           <img src={DataExpImp} alt="data export and import" />

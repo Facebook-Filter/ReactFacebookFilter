@@ -4,8 +4,8 @@ class Faq extends Component {
   render() {
     return (
       <div className="Faq">
-        <h3 class="faq question">Is This Thing Legit?</h3>
-        <p class="faq answer">
+        <h3 className="faq question">Is This Thing Legit?</h3>
+        <p className="faq answer">
           Yes. <br /> <br />
           Social Fixer is a community project, We are the sole programmer,
           designer, tester, documentation-writer, and marketer. You can view our
@@ -23,10 +23,10 @@ class Faq extends Component {
           security, and it won't insert ads, spam, porn, or malware. There are
           no viruses or spyware. The code is safe.
         </p>
-        <h3 class="faq question">
+        <h3 className="faq question">
           Does Social Fixer compromise my privacy or security?
         </h3>
-        <p class="faq answer">
+        <p className="faq answer">
           No and No. And it never will!
           <br />
           <br />
@@ -52,10 +52,10 @@ class Faq extends Component {
           or your friends lists, or any other information about you or in your
           account. It only processes information - it never changes it.
         </p>
-        <h3 class="faq question">
+        <h3 className="faq question">
           Does Social Fixer insert ads, spam, porn, or malware?
         </h3>
-        <p class="faq answer">
+        <p className="faq answer">
           Absolutely not. And it never will!
           <br />
           <br />
@@ -70,10 +70,10 @@ class Faq extends Component {
             <li>Faceplus</li>
           </ul>
         </p>
-        <h3 class="faq question">
+        <h3 className="faq question">
           Something isn't working! What's wrong? How do I debug the problem?
         </h3>
-        <p class="faq answer">
+        <p className="faq answer">
           First, understand that Facebook often has glitches and problems on its
           own. Many problems that users think are caused by SFX are actually
           just Facebook screwing up. To check, you can always disable SFX and
@@ -95,11 +95,11 @@ class Faq extends Component {
           additional time, and I may need to get assistance from other SFX
           users. Read more at How It Works (and why it sometimes doesn't).
         </p>
-        <h3 class="faq question">
+        <h3 className="faq question">
           Why does the Chrome extension permissions include "Your tabs and
           browsing activity"?
         </h3>
-        <p class="faq answer">
+        <p className="faq answer">
           This is indeed confusing, because Social Fixer does not ever access
           your other tabs or browsing activity.
           <br />
