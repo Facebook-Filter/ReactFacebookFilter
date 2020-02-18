@@ -1,217 +1,51 @@
-.features-intro{
-    text-align: center;
-    margin: 13%;
-  }
+.features-intro {
+  text-align: center;
+  margin: 13%;
+}
 
-  #features-h1{
-    font-size:70px;
-    color: #385aca
-  }
+#features-h1 {
+  font-size: 70px;
+  color: #385aca;
+}
 
-  #features-defn{
-    line-height: 10%;
-    margin-top: 5%;
-    font-size: large;
-    font-style: italic;
-  }
+#features-defn {
+  line-height: 10%;
+  margin-top: 5%;
+  font-size: large;
+  font-style: italic;
+}
+.features_container {
+  display: grid;
+  grid-row-gap: 70px;
+}
+.grid-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "content image";
+  gap: 30px;
+}
+.grid-feature:nth-child(even) {
+  grid-template-areas: "image content";
+}
+.grid-feature:nth-child(odd) {
+  grid-template-areas: "content image";
+}
+.grid-feature .content {
+  grid-area: content;
+}
 
-  .grid-feature-1{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin:10%;
-  }
+.grid-feature .featured_image {
+  grid-area: image;
+}
+.grid-feature .f1-h2 {
+  color: red;
+}
+.featured_image img {
+  width: 100%;
+  height: auto;
+}
 
-  #f1-h2{
-    color: red
-  }
-
-  #f1-pic-size{
-    width:35em;
-    height:15em;
-  }
-
-  #f2-pic-size{
-    width:35em;
-    height:15em;
-  }
-
-  #f2-h2{
-    color: red
-  }
-
-  .grid-feature-3{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin:20%;
-  }
-
-  #p3-size{
-    width:20em;
-  }
-
-  #f3-h2{
-    color: red
-  }
-
-  #ads-f3-size{
-    width: 20em;
-    height: 20em;
-    margin-left: 45%;
-  }
-
-  .grid-feature-4{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin:10%;
-  }
-
-  #hidePolitics-f4-size{
-    width:25em;
-    height:15em;
-  }
-
-  #p4-size{
-    width:20em;
-  }
-
-  #f4-h2{
-    color: red
-  }
-
-  .grid-feature-5{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15em;
-    margin:10%;
-  }
-
-  #p5-size{
-    width:20em;
-  }
-
-  #f5-h2{
-    color: red
-  }
-
-  #f5-pic-size{
-    height: 18em;
-  }
-
-  .grid-feature-6{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin:10%;
-  }
-
-  #f6-h2{
-    color: red
-  }
-
-  .grid-feature-7{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin:10%;
-  }
-
-  #f7-h2{
-    color: red
-  }
-
-  .grid-feature-8{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin:10%;
-  }
-
-  #f8-h2{
-    color: red
-  }
-
-  .grid-feature-9{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 150px;
-    margin:10%;
-  }
-
-  #f9-h2{
-    color: red
-  }
-
-  #f10-h2{
-    color: red
-  }
-
-
-  #f9-pic-size{
-    width:20em;
-    height:11.5em;
-  }
-
-  .grid-feature-10{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin:10%;
-  }
-
-  #f10-pic-size{
-    width:20em;
-    height:11.5em;
-  }
-
-  .grid-feature-11{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 150px;
-    margin:10%;
-  }
-
-  #f11-h2{
-    color: red
-  }
-
-  #f11-pic-size{
-    width:20em;
-    height:11.5em;
-  }
-
-  .grid-feature-12{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 150px;
-    margin:10%;
-  }
-
-  #f12-pic-size{
-    width:20em;
-    height:11.5em;
-  }
-
-  #f12-h2{
-    color: red
-  }
-
-  .grid-feature-13{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 150px;
-    margin:10%;
-  }
-
-  #f13-pic-size{
-    width:20em;
-    height:11.5em;
-  }
-
-
-  
-
-
-
- 
+.grid-feature .f1-pic-size {
+  width: 35em;
+  height: 15em;
+}

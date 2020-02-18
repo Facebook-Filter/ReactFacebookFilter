@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import ImageGallery from "react-image-gallery";
+import BeautyStars from "beauty-stars";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Image1 from "../../assets/image/f-1.png";
-import BeautyStars from "beauty-stars";
+import ImageGallery from "react-image-gallery";
+
+import LogoSlogan from "./HomeComponents/LogoSlogan"
 import "./Home.css";
 
 class Home extends Component {
@@ -11,7 +13,7 @@ class Home extends Component {
     this.state = {
       reviewList: [],
       username: "",
-      review:'',
+      review: "",
       star: 0
     };
   }
@@ -26,36 +28,34 @@ class Home extends Component {
     this.setState({ review: e.target.value });
   };
 
-
- 
-
-  addReview(){
+  addReview() {
     let newList = this.state.reviewList;
-    if (this.state.review==='' || this.state.username===''){
+    if (this.state.review === "" || this.state.username === "") {
       return "error";
     }
-        newList.push({username:this.state.username,review:this.state.review,star:this.state.star});
-        this.setState({ reviewList: newList, username:'', review: '',star:0})
-      
+    newList.push({
+      username: this.state.username,
+      review: this.state.review,
+      star: this.state.star
+    });
+    this.setState({ reviewList: newList, username: "", review: "", star: 0 });
   }
 
+  deleteReview(index) {
+    let arr = this.state.reviewList;
+    arr.splice(index, 1);
 
-
-  deleteReview(index){
-    let arr=this.state.reviewList;
-    arr.splice(index,1);
-    
-        this.setState({ reviewList: arr })
+    this.setState({ reviewList: arr });
   }
 
   render() {
-    const images = [
+    const images1 = [
       {
         original: Image1,
         thumbnail: Image1
       },
       {
-        original: "https://picsum.photos/id/1015/1000/600/",
+        original: "../../images/logo.png",
         thumbnail: "https://picsum.photos/id/1015/250/150/"
       },
       {
@@ -66,23 +66,13 @@ class Home extends Component {
 
     return (
       <div className="Home">
-        <div className="Slider">
-          <ImageGallery
-            items={images}
-            showPlayButton={false}
-            showNav={false}
-            showThumbnails={false}
-            showFullscreenButton={false}
-            showBullets={true}
-            autoPlay={true}
-            slideDuration={1100}
-            slideInterval={5000}
-          />
-        </div>
-        
+
+    <LogoSlogan />
+
         <div className="Rating">
-          <h3>Your review is very important to us</h3>
+          
           <p>
+          <h3>Your review is very important to us</h3>
             {this.state.star === 1
               ? "terrible"
               : this.state.star === 2
@@ -92,8 +82,7 @@ class Home extends Component {
               : this.state.star === 4
               ? "very good"
               : this.state.star === 5
-              ? "Excellent"
-              : "please rate us"}
+              ? "Excellent":"Please Rate Us"}
           </p>
           <div className="stars">
             <BeautyStars
@@ -103,33 +92,69 @@ class Home extends Component {
             />
             <p>{this.state.star}/5</p>
           </div>
+          <fieldset className="Review">
+            <legend>Please Enter your Review </legend>
+            <label for="username">User-Name:</label>
+            <input
+              type="text"
+              id="fname"
+              cols="20"
+              rows="20"
+              placeholder="Please enter your username"
+              value={this.state.username}
+              onChange={e => this.username(e)}
+              name="fname"
+            />
+            <br />
+            <label for="review">Review:</label>
+            <input
+              type="text"
+              id="review"
+              cols="20"
+              rows="20"
+              placeholder="Please enter your review"
+              value={this.state.review}
+              onChange={e => this.review(e)}
+              name="fname"
+            />
+          </fieldset>
           <input
-            className="username"
-            type="text"
-            placeholder="Please enter your username"
-            value={this.state.username}
-            onChange={e => this.username(e)}
+            className="Submit_review"
+            type="submit"
+            value="Submit"
+            onClick={() => this.addReview()}
           />
-          <input
-            className="Review"
-            type="text"
-            placeholder="Please enter your review"
-            value={this.state.review}
-            onChange={e => this.review(e)}
-          />
-          <input className="Submit_review" type="submit" value="Submit" onClick={()=>this.addReview()} />
-        
-        <ul>
-            {this.state.reviewList.map((user,index)=>{
+
+          <ul>
+            {this.state.reviewList.map((user, index) => {
               return (
                 <li key={index}>
-                  {index+1}- {user.username}- {user.review}-{user.star+'/'+5}
-                  <button type="button" onClick={() => this.deleteReview(index)}>delete</button>
+                  {index + 1}- {user.username}- {user.review}-
+                  {user.star + "/" + 5}
+                  <button
+                    type="button"
+                    onClick={() => this.deleteReview(index)}
+                  >
+                    delete
+                  </button>
                 </li>
-              )
+              );
             })}
           </ul>
+          <div className="Slider">
+            <ImageGallery
+              items={images1}
+              showPlayButton={false}
+              showNav={false}
+              showThumbnails={false}
+              showFullscreenButton={false}
+              showBullets={true}
+              autoPlay={true}
+              slideDuration={1100}
+              slideInterval={5000}
+            />
           </div>
+        </div>
       </div>
     );
   }
