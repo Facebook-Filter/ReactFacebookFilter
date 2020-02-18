@@ -59,12 +59,12 @@ const start = async () => {
     }
   });
 
-  app.get("/review", async (req, res) => {
+  app.get("/reviews", async (req, res) => {
     const review = await controller.getReviews();
     res.json(review);
   });
 
-  app.get("/review/add", async (req, res) => {
+  app.get("/reviews/add", async (req, res) => {
     const username = req.query.username;
     const email = req.query.email;
     const review = req.query.review;
@@ -91,7 +91,7 @@ const start = async () => {
     }
   });
 
-  app.get("/review/delete/:revID", async (req, res) => {
+  app.get("/reviews/delete/:revID", async (req, res) => {
     const revID = req.params.revID;
     try {
       const deleteReview = await controller.deleteReview(revID);
@@ -245,6 +245,63 @@ const start = async () => {
     try {
       const deleteContacts = await controller.deleteContacts(contID);
       res.json({ deleteContacts });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  });
+
+
+
+  app.get('/features', async (req, res) => {
+    const features = await controller.getFeatures();
+    res.json(features);
+  })
+
+
+  app.get("/features/add", async (req, res) => {
+    const title = req.query.title;
+    const image = req.query.image;
+    const description = req.query.description;
+
+    let errors = [];
+    if (title == "" || image == "" || description == "") {
+      errors.push({
+        status: 403,
+        error: true,
+        message:
+          "you cannot create a feature without providing a title, image, and description"
+      });
+    }
+
+    if (errors.length > 0) {
+      res.json({ status: 403, error: true, message: errors });
+    }
+    else {
+      try {
+        const addFeature = await controller.addFeature({ title, image, description });
+        res.json({ featID: addFeature, title: title, image: image, description: description });
+      } catch (e) {
+        res.json({ status: 403, error: true, message: e.message });
+      }
+    }
+  });
+
+  app.get("/features/delete/:featID", async (req, res) => {
+    const featID = req.params.featID;
+    try {
+      const deleteFeature = await controller.deleteFeature(featID);
+      res.json({ deleteFeature });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  });
+  app.get("/features/update/:featID", async (req, res) => {
+    const featID = req.params.featID;
+    const { title, image, description } = req.query;
+    console.log(req.query);
+    try {
+      const updateFeature = await controller.updateFeature(featID, { title, image, description });
+      res.json({ updateFeature });
     } catch (e) {
       res.json({ status: 403, error: true, message: e.message });
     }

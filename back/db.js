@@ -19,16 +19,13 @@ const initializeDB = async () => {
         }
         catch (err) {
             err.message;
-            console.log(err.message);
-            throw new Error('this combination doesnt work');
+            throw new Error('Could not add user');
         }
     };
 
     const updateUser = async (id, props) => {
         const { username, password } = props;
-        if (!props || !(props.username && props.password)) {
-            throw new Error('you must provide a username or password');
-        }
+
         let stmt = '';
         if (username && password) {
             stmt = `update users set username='${username}', password='${password}' where id= ${id}`;
@@ -38,6 +35,9 @@ const initializeDB = async () => {
         }
         else if (password && !username) {
             stmt = `update users set password='${password}' where id= ${id}`;
+        }
+        else {
+            throw new Error('you must provide a username or password');
         }
 
         try {
@@ -82,7 +82,7 @@ const initializeDB = async () => {
         catch (err) {
             err.message;
             console.log(err.message);
-            throw new Error('this combination doesnt work');
+            throw new Error('Could not add review');
         }
     };
 
@@ -115,16 +115,13 @@ const initializeDB = async () => {
         }
         catch (err) {
             err.message;
-            throw new Error('could not add faq');
+            throw new Error('Could not add faq');
         }
     };
 
     const updateFaq = async (faqID, props) => {
         const { question, answer } = props;
-        console.log("here")
-        if (!props || !(props.question && props.answer)) {
-            throw new Error('you must provide a question or an answer');
-        }
+
         let stmt = '';
         if (question && answer) {
             stmt = `update faqs set question='${question}', answer='${answer}' where faqID= ${faqID}`;
@@ -134,6 +131,9 @@ const initializeDB = async () => {
         }
         else if (answer && !question) {
             stmt = `update faqs set answer='${answer}' where faqID= ${faqID}`;
+        }
+        else {
+            throw new Error('you must provide a question or an answer');
         }
 
         try {
@@ -177,15 +177,13 @@ const initializeDB = async () => {
         }
         catch (err) {
             err.message;
-            throw new Error('Could not add Support :(');
+            throw new Error('Could not add support');
         }
     };
 
     const updateSupport = async (questID, props) => {
         const { email, question } = props;
-        if (!props || !(props.email && props.question)) {
-            throw new Error('you must provide an email or question');
-        }
+
         let stmt = '';
         if (email && question) {
             stmt = `update supports set email='${email}', question='${question}' where questID= ${questID}`;
@@ -196,16 +194,19 @@ const initializeDB = async () => {
         else if (question && !email) {
             stmt = `update supports set question='${question}' where questID= ${questID}`;
         }
+        else {
+            throw new Error('you must provide an email or question');
+        }
 
         try {
             const updateSupport = await db.run(stmt);
             if (updateSupport.stmt.changes == 0) {
-                throw new Error(`users with questID ${questID} doesnt exist`);
+                throw new Error(`support with questID ${questID} does not exist`);
             }
             return true;
         }
         catch (err) {
-            throw new Error(`Could not update supports with id ${questID}` + err);
+            throw new Error(`Could not update support with id ${questID}` + err);
         }
     };
 
@@ -219,7 +220,6 @@ const initializeDB = async () => {
             throw new Error(`Could not delete question with id ${questID}`);
         }
     };
-
 
 
     const getContacts = async () => {
@@ -256,6 +256,83 @@ const initializeDB = async () => {
     };
 
 
+
+
+    const getFeatures = async () => {
+        const features = await db.all('Select * from features');
+        return features;
+    }
+
+    const addFeature = async props => {
+        const { title, image, description } = props;
+        if (!props || !title || !image || !description) {
+            throw new Error('you must provide a title, foran image and a description');
+        }
+        try {
+            const addFeature = await db.run(`Insert into features (title, image, description) values ('${title}', '${image}', '${description}')`);
+            return addFeature.stmt.lastID;
+        }
+        catch (err) {
+            err.message;
+            console.log({ title, image, description });
+            throw new Error(err.message);
+        }
+    };
+
+    const updateFeature = async (featID, props) => {
+        const { title, image, description } = props;
+
+        let stmt = '';
+        if (title && image && description) {
+            stmt = `Update features set title='${title}', image='${image}', description=${description} where featID= ${featID}`;
+        }
+        else if (title && !image && !description) {
+            stmt = `Update features set title='${title}' where featID= ${featID}`;
+        }
+        else if (!title && image && !description) {
+            stmt = `Update features set image='${image}' where featID= ${featID}`;
+        }
+        else if (!title && !image && description) {
+            stmt = `Update features set description='${description}' where featID=${featID}`;
+        }
+        else if (title && image && !description) {
+            stmt = `Update features set title='${title}', image='${image}' where featID=${featID}`;
+        }
+        else if (title && !image && description) {
+            stmt = `Update features set title='${title}', description='${description}' where featID=${featID}`;
+        }
+        else if (!title && image && description) {
+            stmt = `Update features set image='${image}', description='${description}' where featID=${featID}`;
+        }
+        else {
+            throw new Error('you must provide a title, for an image or a description');
+        }
+
+        try {
+            const updateFeature = await db.run(stmt);
+            if (updateFeature.stmt.changes == 0) {
+                throw new Error(`Feature with id ${featID} does not exist`);
+            }
+            return true;
+        }
+        catch (err) {
+            throw new Error(`Could not update features with id ${featID}` + err);
+        }
+    };
+
+    const deleteFeature = async (featID) => {
+        try {
+            const deleteFeature = await db.run(`Delete from features where featID =${featID}`);
+            return deleteFeature;
+        }
+        catch (err) {
+            err.message;
+            throw new Error(`Could not delete feature with id ${featID}`);
+        }
+    };
+
+
+
     const controller = {
         getReviews,
         addReview,
@@ -274,7 +351,11 @@ const initializeDB = async () => {
         deleteSupport,
         getContacts,
         addContacts,
-        deleteContacts
+        deleteContacts,
+        getFeatures,
+        addFeature,
+        updateFeature,
+        deleteFeature
     }
     return controller;
 
