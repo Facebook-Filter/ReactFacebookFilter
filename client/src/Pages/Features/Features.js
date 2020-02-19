@@ -33,15 +33,15 @@ class Features extends Component {
       .then(features => this.setState({ features }));
   }
 
-  addFeature() {
-    fetch(
-      `/features/add?featID=${this.state.featID}&title=${this.state.title}&image=${this.state.image}&description=${this.state.description}`
-    )
-      .then(res => res.json())
-      .then(users => {
-        this.setState({ features: features });
-      });
-  }
+  // addFeature() {
+  //   fetch(
+  //     `/features/add?featID=${this.state.featID}&title=${this.state.title}&image=${this.state.image}&description=${this.state.description}`
+  //   )
+  //     .then(res => res.json())
+  //     .then(users => {
+  //       this.setState({ features: features });
+  //     });
+  // }
   render() {
     return (
       <>
@@ -92,33 +92,9 @@ class Features extends Component {
                 deleteFeature={this.deleteFeature}
                 editFeature={this.editFeature}
               />)
-            
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   // image={`http://localhost:3000/img/features/${test}`}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
+              })
+            }
+           
             </div>
           </div>
         </div>
