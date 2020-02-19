@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./client.css";
 
 class Admin extends Component {
 	constructor(props) {
@@ -24,11 +25,13 @@ class Admin extends Component {
 	render() {
 		return (
 			<div>
-				<form
-					onSubmit={event => {
+				<form className="alignCenter">
+					{event => {
 						event.preventDefault();
 					}}
-				>
+				
+<h2>ADMIN</h2>
+
 					<input
 						type="text"
 						placeholder="Enter Admin name"
@@ -36,7 +39,7 @@ class Admin extends Component {
 						onChange={e => this.username(e)}
 						required
 					/>
-
+<br/><br/>
 					<input
 						type="text"
 						placeholder="Enter password"
@@ -44,7 +47,7 @@ class Admin extends Component {
 						onChange={e => this.password(e)}
 						required
 					/>
-
+<br/><br/>
 					<input
 						type="submit"
 						value="Login"
