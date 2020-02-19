@@ -332,6 +332,68 @@ const initializeDB = async () => {
     };
 
 
+    const getBlog = async () => {
+        const blog = await db.all('Select * from blogs');
+        return blog;
+    }
+
+    const addBlog = async props => {
+        const { title, blogText } = props;
+        if (!props || !title || !blogText) {
+            throw new Error('you must provide a title and a text for the blog');
+        }
+        try {
+            const addBlog = await db.run(`Insert into blogs (title, blogText) values ('${title}', '${blogText}')`);
+            return addBlog.stmt.lastID;
+        }
+        catch (err) {
+            err.message;
+            throw new Error('Could not add blog');
+        }
+    };
+
+    const updateBlog = async (blogID, props) => {
+        const { title, blogText } = props;
+
+        let stmt = '';
+        if (title && blogText) {
+            stmt = `update blogs set title='${title}', blogText='${blogText}' where blogID= ${blogID}`;
+        }
+        else if (title && !blogText) {
+            stmt = `update blogs set title='${title}' where blogID= ${blogID}`;
+        }
+        else if (!title && blogText) {
+            stmt = `update blogs set blogTitle='${blogText}' where blogID= ${blogID}`;
+        }
+        else {
+            throw new Error('you must provide an title or text for the blog');
+        }
+
+        try {
+            const updateBlog = await db.run(stmt);
+            if (updateBlog.stmt.changes == 0) {
+                throw new Error(`blog with id ${blogID} does not exist`);
+            }
+            return true;
+        }
+        catch (err) {
+            throw new Error(`Could not update blog with id ${blogID}` + err);
+        }
+    };
+
+    const deleteBlog = async (blogID) => {
+        try {
+            const deleteBlog = await db.run(`Delete from blogs where blogID =${blogID}`);
+            return deleteBlog;
+        }
+        catch (err) {
+            err.message;
+            throw new Error(`Could not delete blog with id ${blogID}`);
+        }
+    };
+
+
+
 
     const controller = {
         getReviews,
@@ -355,10 +417,13 @@ const initializeDB = async () => {
         getFeatures,
         addFeature,
         updateFeature,
-        deleteFeature
+        deleteFeature,
+        getBlog,
+        addBlog,
+        updateBlog,
+        deleteBlog
     }
     return controller;
-
 }
 
 
