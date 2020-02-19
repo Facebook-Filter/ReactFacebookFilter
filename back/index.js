@@ -5,6 +5,7 @@ app.use(cors());
 const initializeDB = require("./db.js");
 const PORT = 5000;
 
+
 const start = async () => {
   const controller = await initializeDB();
 
@@ -308,9 +309,64 @@ const start = async () => {
   });
 
 
+  app.get('/blog', async (req, res) => {
+    const blog = await controller.getBlog();
+    res.json(blog);
+  })
+
+
+  app.get("/blog/add", async (req, res) => {
+    const title = req.query.title;
+    const blogText = req.query.blogText;
+
+    let errors = [];
+    if (title == "" || blogText == "") {
+      errors.push({
+        status: 403,
+        error: true,
+        message:
+          "you cannot create a blog without providing a title and a text for the blog"
+      });
+    }
+
+    if (errors.length > 0) {
+      res.json({ status: 403, error: true, message: errors });
+    }
+    else {
+      try {
+        const addBlog = await controller.addBlog({ title, blogText });
+        res.json({ blogID: addBlog, title: title, blogText: blogText });
+      } catch (e) {
+        res.json({ status: 403, error: true, message: e.message });
+      }
+    }
+  });
+
+  app.get("/blog/delete/:blogID", async (req, res) => {
+    const blogID = req.params.blogID;
+    try {
+      const deleteBlog = await controller.deleteBlog(blogID);
+      res.json({ deleteBlog });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  });
+  app.get("/blog/update/:blogID", async (req, res) => {
+    const blogID = req.params.blogID;
+    const { title, blogText } = req.query;
+    try {
+      const updateBlog = await controller.updateBlog(blogID, { title, blogText });
+      res.json({ updateBlog });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  });
 
 }
+
+start();
+
+
 app.listen(PORT, () =>
   console.log(`Server running at: http://localhost:${PORT}/`)
 );
-start();
