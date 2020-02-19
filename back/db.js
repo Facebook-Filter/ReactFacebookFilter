@@ -60,7 +60,6 @@ const initializeDB = async () => {
         }
         catch (err) {
             err.message;
-            console.log(err.message);
             throw new Error(`user with id ${id} does not exist`);
         }
     };
