@@ -21,27 +21,19 @@ class Features extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      features: [],
-      title: "",
-      // image: [],
-      description: ""
+      // features: [],
+      // title: [],
+      // // image:[],
+      // description: []
     };
   }
+
   async componentDidMount() {
     fetch("/features")
       .then(res => res.jsong())
       .then(features => this.setState({ features }));
   }
 
-  addFeature() {
-    fetch(
-      `/features/add?featID=${this.state.featID}&title=${this.state.title}&image=${this.state.image}&description=${this.state.description}`
-    )
-      .then(res => res.json())
-      .then(users => {
-        this.setState({ features: features });
-      });
-  }
   render() {
     return (
       <>
@@ -59,66 +51,33 @@ class Features extends Component {
               </div>
             </div>
 
-            <input
-              type="text"
-              placeholder="Enter your feature"
-              value={this.state.featureTitle}
-              onChange={e => this.featuretitle(e)}
-            />
-            <input
-              type="text"
-              placeholder="Enter your Description"
-              value={this.state.description}
-              onChange={e => this.description(e)}
-            />
-            <input
-              type="submit"
-              value={this.state.editing ? "Update" : "Add"}
-              onClick={
-                this.state.editing
-                  ? e => this.updateFeature()
-                  : e => this.addFeature()
-              }
-            />
-
             <div className="features_container">
-
-              
-            {this.state.features.map((feature, index) => {
-              return (<Feature
-                key={index}
-                id={index}
-                value={feature}
-                deleteFeature={this.deleteFeature}
-                editFeature={this.editFeature}
-              />)
-            
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   // image={`http://localhost:3000/img/features/${test}`}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
-              // <Feature
-              //   title="hello world"
-              //   image={Image1}
-              //   description={"Hello worlds"}
-              // />
+              <Feature
+                title="hello world"
+                image={Image1}
+                // image={`http://localhost:3000/img/features/${test}`}
+                description={"Hello worlds"}
+              />
+              <Feature
+                title="hello world"
+                image={Image1}
+                description={"Hello worlds"}
+              />
+              <Feature
+                title="hello world"
+                image={Image1}
+                description={"Hello worlds"}
+              />
+              <Feature
+                title="hello world"
+                image={Image1}
+                description={"Hello worlds"}
+              />
+              <Feature
+                title="hello world"
+                image={Image1}
+                description={"Hello worlds"}
+              />
             </div>
           </div>
         </div>
