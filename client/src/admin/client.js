@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./client.css";
+
 class Admin extends Component {
 	constructor(props) {
 		super(props);
@@ -23,36 +25,40 @@ class Admin extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<form
-					onSubmit={event => {
-						event.preventDefault();
-					}}
-				>
-					<input
-						type="text"
-						placeholder="Enter Admin name"
-						value={this.state.username}
-						onChange={e => this.username(e)}
-						required
-					/>
-
-					<input
-						type="text"
-						placeholder="Enter password"
-						value={this.state.password}
-						onChange={e => this.password(e)}
-						required
-					/>
-
-					<input
-						type="submit"
-						value="Login"
-						onClick={
-							this.signIn()
-						}
-					/>
-				</form>
+			<div className="Login">
+				<div className="container">
+					<form id="adminLogin" action method="post">
+						<h3>Login</h3>
+						<h4>Please enter your credentials</h4>
+						<fieldset>
+							<input
+								placeholder="username"
+								type="text"
+								tabIndex={1}
+								required
+								autofocus
+							/>
+						</fieldset>
+						<fieldset>
+							<input
+								placeholder="password"
+								type="password"
+								tabIndex={2}
+								required
+							/>
+						</fieldset>
+						<fieldset>
+							<button
+								name="submit"
+								type="submit"
+								id="contact-submit"
+								data-submit="...Sending"
+							>
+								Login
+              					</button>
+						</fieldset>
+					</form>
+				</div>
 			</div>
 		);
 	}

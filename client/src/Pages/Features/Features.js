@@ -29,7 +29,7 @@ class Features extends Component {
   }
   async componentDidMount() {
     fetch("/features")
-      .then(res => res.jsong())
+      .then(res => res.json())
       .then(features => this.setState({ features }));
   }
 
@@ -83,18 +83,18 @@ class Features extends Component {
 
             <div className="features_container">
 
-              
-            {this.state.features.map((feature, index) => {
-              return (<Feature
-                key={index}
-                id={index}
-                value={feature}
-                deleteFeature={this.deleteFeature}
-                editFeature={this.editFeature}
-              />)
+
+              {this.state.features.map((feature, index) => {
+                return (<Feature
+                  key={index}
+                  id={index}
+                  value={feature}
+                  deleteFeature={this.deleteFeature}
+                  editFeature={this.editFeature}
+                />)
               })
-            }
-           
+              }
+
             </div>
           </div>
         </div>
