@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./Components/Nav";
-import About from "./Components/About/About";
-import Features from "./Components/Features/Features";
-import ContactUs from "./Components/ContactUs";
-import Donate from "./Components/Donate/Donate";
-import Download from "./Components/Download/Download";
-import Support from "./Components/Support";
+
+import Nav from "./Components/Nav/Nav";
+import About from "./Pages/About/About";
+import Features from "./Pages/Features/Features";
+import ContactUs from "./Pages/ContactUs/ContactUs";
+import Donate from "./Pages/Donate/Donate";
+import Download from "./Pages/Download/Download";
+import Support from "./Components/Support/Support";
 import FAQ from "./Components/Faq/Faq";
-import Footer from "./Components/Footer";
-import Blog from "./Components/Blog";
-import Home from "./Components/Home/Home";
-import BackDrop from "./Components/BackDrop";
-import SideDrawer from "./Components/SideDrawer";
+import Footer from "./Components/Footer/Footer";
+import Blog from "./Pages/Blog/Blog";
+import Home from "./Pages/Home/Home";
+import BackDrop from "./Components/BackDrop/BackDrop";
+import SideDrawer from "./Components/SideDrawer/SideDrawer";
 
 import "./App.css";
 // import './index-1.css';

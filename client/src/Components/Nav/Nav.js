@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import DrawerToggleButton from "./DrawerToggleButton";
-import logo from "../images/shortcut-icon.png";
+import DrawerToggleButton from "../DrawerToggleButton/DrawerToggleButton";
+import logo from "../../images/shortcut-icon.png";
 import "./Nav.css";
 
 const Nav = props => (
