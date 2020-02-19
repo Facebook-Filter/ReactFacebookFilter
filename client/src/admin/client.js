@@ -15,12 +15,12 @@ class Admin extends Component {
 
 	password = e => {
 		this.setState({ password: e.target.value });
-    };
-    
-    signIn=()=>{
+	};
 
-        
-    }
+	signIn = () => {
+
+
+	}
 	render() {
 		return (
 			<div>
@@ -34,6 +34,7 @@ class Admin extends Component {
 						placeholder="Enter Admin name"
 						value={this.state.username}
 						onChange={e => this.username(e)}
+						required
 					/>
 
 					<input
@@ -41,13 +42,14 @@ class Admin extends Component {
 						placeholder="Enter password"
 						value={this.state.password}
 						onChange={e => this.password(e)}
+						required
 					/>
 
 					<input
 						type="submit"
-						value= "Login"
+						value="Login"
 						onClick={
-						 this.signIn()
+							this.signIn()
 						}
 					/>
 				</form>
