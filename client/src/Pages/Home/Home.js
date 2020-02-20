@@ -68,7 +68,6 @@ class Home extends Component {
       <div className="Home">
         <div className="first_row">
           <LogoSlogan />
-
           <div className="Rating">
             <p>
               <h3>Your review is very important to us</h3>

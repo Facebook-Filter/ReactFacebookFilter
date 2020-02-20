@@ -12,8 +12,7 @@ import FAQ from "./Components/Faq/Faq";
 import Footer from "./Components/Footer/Footer";
 import Blog from "./Pages/Blog/Blog";
 import Home from "./Pages/Home/Home";
-import BackDrop from "./Components/BackDrop/BackDrop";
-import SideDrawer from "./Components/SideDrawer/SideDrawer";
+
 
 import Admin from "./admin/client";
 
@@ -22,28 +21,7 @@ import "./App.css";
 // import './index-2.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sideDrawerOpen: false
-    };
-  }
-
-  drawerToggleClickHandler = () => {
-    this.setState(prevState => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen };
-    });
-  };
-
-  backDropClickHandler = () => {
-    this.setState({ sideDrawerOpen: false });
-  };
-
   render() {
-    let backDrop;
-    if (this.state.sideDrawerOpen) {
-      backDrop = <BackDrop click={this.backDropClickHandler} />;
-    }
     return (
       <Router>
         <div className="App">
@@ -52,9 +30,7 @@ class App extends Component {
               <Admin />
             </Route>
             <Route path="/">
-              <Nav drawerClickHandler={this.drawerToggleClickHandler} />
-              <SideDrawer show={this.state.sideDrawerOpen} />
-              {backDrop}
+              <Nav  />
               <div className="app_container">
                 <Route path="/" strict exact component={Home} />
                 <Route path="/about" component={About} />

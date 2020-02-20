@@ -1,4 +1,4 @@
-* {
+/* * {
   box-sizing: border-box;
 }
 html,
@@ -13,33 +13,21 @@ body {
 }
 
 .app_container {
-  background-image: linear-gradient(#ffffff, #284a94);
   padding-top: 54px;
-}
-.Features {
-  margin: 7em 9em;
-}
-
-.Support {
-  margin: 7em 9em 27em;
-  text-align: center;
-}
-
-.Support input {
-  width: 30em;
 }
 
 .active {
   border-bottom: 3px solid #fc284b;
-  color: #fc284b !important;
+ 
 }
 
 .donate-button {
-  color: #fc28a4 !important;
+  color: blue !important;
 }
 
 .donate-button:active {
   position: relative;
+  
   top: 1px;
 }
 
@@ -167,4 +155,19 @@ footer {
 .download-button:active {
   position: relative;
   top: 1px;
+} */
+
+
+* {
+  text-decoration: none;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Open Sans', sans-serif;
 }
