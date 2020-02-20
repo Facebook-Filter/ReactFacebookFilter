@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import Image1 from "../../assets/image/f-1.png";
+// import Image1 from "../../assets/image/f-1.png";
 
 import "./Features.css";
 
-const Feature = ({ title, description, image }) => {
+const Feature = props => {
   return (
     <div className="grid-feature">
       <div className="content">
-        <h2 className="f1-h2">{title}</h2>
-        <p>{description}</p>
+        <h2 className="f1-h2">{props.value.title}</h2>
+        <p>{props.value.description}</p>
       </div>
       <div className="featured_image">
-        <img src={image} className="f1-pic-size" alt="whatever" />
+        <img src={props.value.image} className="f1-pic-size" alt="whatever" />
       </div>
     </div>
   );
@@ -23,25 +23,17 @@ class Features extends Component {
     this.state = {
       features: [],
       title: "",
-      // image: [],
+      image: [],
       description: ""
     };
   }
+
   async componentDidMount() {
     fetch("/features")
       .then(res => res.json())
       .then(features => this.setState({ features }));
   }
 
-  // addFeature() {
-  //   fetch(
-  //     `/features/add?featID=${this.state.featID}&title=${this.state.title}&image=${this.state.image}&description=${this.state.description}`
-  //   )
-  //     .then(res => res.json())
-  //     .then(users => {
-  //       this.setState({ features: features });
-  //     });
-  // }
   render() {
     return (
       <>
@@ -59,42 +51,14 @@ class Features extends Component {
               </div>
             </div>
 
-            <input
-              type="text"
-              placeholder="Enter your feature"
-              value={this.state.featureTitle}
-              onChange={e => this.featuretitle(e)}
-            />
-            <input
-              type="text"
-              placeholder="Enter your Description"
-              value={this.state.description}
-              onChange={e => this.description(e)}
-            />
-            <input
-              type="submit"
-              value={this.state.editing ? "Update" : "Add"}
-              onClick={
-                this.state.editing
-                  ? e => this.updateFeature()
-                  : e => this.addFeature()
-              }
-            />
-
             <div className="features_container">
-
-
               {this.state.features.map((feature, index) => {
-                return (<Feature
-                  key={index}
-                  id={index}
-                  value={feature}
-                  deleteFeature={this.deleteFeature}
-                  editFeature={this.editFeature}
-                />)
-              })
-              }
+                return (
+                  // <li key={index}>
 
+                  <Feature key={index} featID={index} value={feature} />
+                );
+              })}
             </div>
           </div>
         </div>

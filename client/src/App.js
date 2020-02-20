@@ -15,64 +15,64 @@ import Home from "./Pages/Home/Home";
 import BackDrop from "./Components/BackDrop/BackDrop";
 import SideDrawer from "./Components/SideDrawer/SideDrawer";
 
-import Admin from './admin/client'
+import Admin from "./admin/client";
 
 import "./App.css";
 // import './index-1.css';
 // import './index-2.css';
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			sideDrawerOpen: false
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      sideDrawerOpen: false
+    };
+  }
 
-	drawerToggleClickHandler = () => {
-		this.setState(prevState => {
-			return { sideDrawerOpen: !prevState.sideDrawerOpen };
-		});
-	};
+  drawerToggleClickHandler = () => {
+    this.setState(prevState => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen };
+    });
+  };
 
-	backDropClickHandler = () => {
-		this.setState({ sideDrawerOpen: false });
-	};
+  backDropClickHandler = () => {
+    this.setState({ sideDrawerOpen: false });
+  };
 
-	render() {
-		let backDrop;
-		if (this.state.sideDrawerOpen) {
-			backDrop = <BackDrop click={this.backDropClickHandler} />;
-		}
-		return (
-			<Router>
-				<div className="App">
-					<Switch>
-						<Route path="/admin">
-							<Admin />
-						</Route>
-						<Route path="/">
-							<Nav drawerClickHandler={this.drawerToggleClickHandler} />
-							<SideDrawer show={this.state.sideDrawerOpen} />
-							{backDrop}
-							<div className="app_container">
-								<Route path="/" strict exact component={Home} />
-								<Route path="/about" component={About} />
-								<Route path="/features" component={Features} />
-								<Route path="/donate" component={Donate} />
-								<Route path="/faq" component={FAQ} />
-								<Route path="/support" component={Support} />
-								<Route path="/contactus" component={ContactUs} />
-								<Route path="/download" component={Download} />
-								<Route pagh="/blog" component={Blog} />
-								<Footer />
-							</div>
-						</Route>
-					</Switch>
-				</div>
-			</Router>
-		);
-	}
+  render() {
+    let backDrop;
+    if (this.state.sideDrawerOpen) {
+      backDrop = <BackDrop click={this.backDropClickHandler} />;
+    }
+    return (
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/admin">
+              <Admin />
+            </Route>
+            <Route path="/">
+              <Nav drawerClickHandler={this.drawerToggleClickHandler} />
+              <SideDrawer show={this.state.sideDrawerOpen} />
+              {backDrop}
+              <div className="app_container">
+                <Route path="/" strict exact component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/features" component={Features} />
+                <Route path="/donate" component={Donate} />
+                <Route path="/faq" component={FAQ} />
+                <Route path="/support" component={Support} />
+                <Route path="/contactus" component={ContactUs} />
+                <Route path="/download" component={Download} />
+                <Route path="/blog" component={Blog} />
+                <Footer />
+              </div>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
