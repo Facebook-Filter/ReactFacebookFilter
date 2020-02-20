@@ -14,7 +14,7 @@ import Blog from "./Pages/Blog/Blog";
 import Home from "./Pages/Home/Home";
 
 
-import Admin from "./admin/client";
+import Admin from "./admin/Admin";
 
 import "./App.css";
 // import './index-1.css';
