@@ -64,7 +64,7 @@ class App extends Component {
                 <Route path="/support" component={Support} />
                 <Route path="/contactus" component={ContactUs} />
                 <Route path="/download" component={Download} />
-                <Route pagh="/blog" component={Blog} />
+                <Route path="/blog" component={Blog} />
                 <Footer />
               </div>
             </Route>
