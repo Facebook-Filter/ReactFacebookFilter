@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import './Features.css';
 // import Image1 from "../../assets/image/f-1.png";
 
-import "./Features.css";
 
 const Feature = props => {
   return (
