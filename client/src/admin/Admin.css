@@ -40,7 +40,7 @@
 
 .Login #adminLogin input[type="text"],
 .Login #adminLogin input[type="password"]{
-  width: 100%;
+  width: 94%;
   border: 1px solid #ccc;
   background: #fff;
   margin: 0 0 5px;
