@@ -14,7 +14,7 @@ import Blog from "./Pages/Blog/Blog";
 import Home from "./Pages/Home/Home";
 
 
-import Admin from "./admin/Admin";
+// import Admin from "./admin/Admin";
 
 import "./App.css";
 // import './index-1.css';
@@ -26,9 +26,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
-            <Route path="/admin">
+            {/* <Route path="/admin">
               <Admin />
-            </Route>
+            </Route> */}
             <Route path="/">
               <Nav  />
               <div className="app_container">
