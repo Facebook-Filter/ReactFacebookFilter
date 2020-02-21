@@ -1,163 +1,133 @@
-import React, { Component } from "react";
-import BeautyStars from "beauty-stars";
-import "react-image-gallery/styles/css/image-gallery.css";
-import Image1 from "../../assets/image/f-1.png";
-import ImageGallery from "react-image-gallery";
+import React from 'react';
+// import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+// import CameraIcon from '@material-ui/icons/PhotoCamera';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 
-import LogoSlogan from "./HomeComponents/LogoSlogan";
-import "./Home.css";
-
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      reviewList: [],
-      username: "",
-      review: "",
-      star: 0
-    };
-  }
-
-  username = e => {
-    e.preventDefault();
-    this.setState({ username: e.target.value });
-  };
-
-  review = e => {
-    e.preventDefault();
-    this.setState({ review: e.target.value });
-  };
-
-  addReview() {
-    let newList = this.state.reviewList;
-    if (this.state.review === "" || this.state.username === "") {
-      return "error";
-    }
-    newList.push({
-      username: this.state.username,
-      review: this.state.review,
-      star: this.state.star
-    });
-    this.setState({ reviewList: newList, username: "", review: "", star: 0 });
-  }
-
-  deleteReview(index) {
-    let arr = this.state.reviewList;
-    arr.splice(index, 1);
-
-    this.setState({ reviewList: arr });
-  }
-
-  render() {
-    const images1 = [
-      {
-        original: Image1,
-        thumbnail: Image1
-      },
-      {
-        original: "../../images/logo.png",
-        thumbnail: "https://picsum.photos/id/1015/250/150/"
-      },
-      {
-        original: "https://picsum.photos/id/1019/1000/600/",
-        thumbnail: "https://picsum.photos/id/1019/250/150/"
-      }
-    ];
-
-    return (
-      <div className="Home">
-        <div className="first_row">
-          <LogoSlogan />
-          <div className="Rating">
-            <p>
-              <h3>Your review is very important to us</h3>
-              {this.state.star === 1
-                ? "terrible"
-                : this.state.star === 2
-                ? "bad"
-                : this.state.star === 3
-                ? "good"
-                : this.state.star === 4
-                ? "very good"
-                : this.state.star === 5
-                ? "Excellent"
-                : "Please Rate Us"}
-            </p>
-            <div className="stars">
-              <BeautyStars
-                value={this.state.star}
-                onChange={star => this.setState({ star })}
-                size="20px"
-              />
-              <p>{this.state.star}/5</p>
-            </div>
-            <fieldset className="Review">
-              <legend>Please Enter your Review </legend>
-              <label for="username">User-Name:</label>
-              <input
-                type="text"
-                id="fname"
-                cols="20"
-                rows="20"
-                placeholder="Please enter your username"
-                value={this.state.username}
-                onChange={e => this.username(e)}
-                name="fname"
-              />
-              <br />
-              <label for="review">Review:</label>
-              <input
-                type="text"
-                id="review"
-                cols="20"
-                rows="20"
-                placeholder="Please enter your review"
-                value={this.state.review}
-                onChange={e => this.review(e)}
-                name="fname"
-              />
-            </fieldset>
-            <input
-              className="Submit_review"
-              type="submit"
-              value="Submit"
-              onClick={() => this.addReview()}
-            />
-
-            <ul>
-              {this.state.reviewList.map((user, index) => {
-                return (
-                  <li key={index}>
-                    {index + 1}- {user.username}- {user.review}-
-                    {user.star + "/" + 5}
-                    <button
-                      type="button"
-                      onClick={() => this.deleteReview(index)}
-                    >
-                      delete
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="Slider">
-              <ImageGallery
-                items={images1}
-                showPlayButton={false}
-                showNav={false}
-                showThumbnails={false}
-                showFullscreenButton={false}
-                showBullets={true}
-                autoPlay={true}
-                slideDuration={1100}
-                slideInterval={5000}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
-export default Home;
+const useStyles = makeStyles(theme => ({
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  heroButtons: {
+    marginTop: theme.spacing(4),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  footer: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
+}));
+
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+export default function Album() {
+  const classes = useStyles();
+
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <main>
+        <div className={classes.heroContent}>
+          <Container maxWidth="sm">
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+              Album layout
+            </Typography>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+              Something short and leading about the collection below—its contents, the creator, etc.
+              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
+              entirely.
+            </Typography>
+            <div className={classes.heroButtons}>
+              <Grid container spacing={2} justify="center">
+                <Grid item>
+                  <Button variant="contained" color="primary">
+                    Main call to action
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="outlined" color="primary">
+                    Secondary action
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+          </Container>
+        </div>
+        <Container className={classes.cardGrid} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {cards.map(card => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Heading
+                    </Typography>
+                    <Typography>
+                      This is a media card. You can use this section to describe the content.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                    <Button size="small" color="primary">
+                      Edit
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </main>
+
+    </React.Fragment>
+  );
+}
