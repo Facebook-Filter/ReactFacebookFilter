@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./Admin.css";
+import "./Login.css";
 
 
-class Admin extends Component {
+class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -64,4 +64,4 @@ class Admin extends Component {
 	}
 }
 
-export default Admin;
+export default Login;

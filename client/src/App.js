@@ -14,10 +14,10 @@ import Blog from "./Pages/Blog/Blog";
 import Home from "./Pages/Home/Home";
 
 
-import Admin from "./admin/Admin";
+import AppAdmin from "./admin/AppAdmin";
 
 import "./App.css";
-// import './index-1.css';
+// import './index-1.css'; 
 // import './index-2.css';
 
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route path="/admin">
-              <Admin />
+              <AppAdmin />
             </Route>
             <Route path="/">
               <Nav  />
