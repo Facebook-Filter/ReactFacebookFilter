@@ -6,8 +6,10 @@ import "./Nav.css";
 
 const Nav = props => (
   <div className="nav">
-    <label htmlFor="toggle">☰</label>
+    <Link className="logo" to='/'>Social Fixers</Link>
+    <label htmlFor="toggle" className="toogle_label">☰</label>
     <input type="checkbox" id="toggle" />
+  
     <div className="menu">
       <NavLink activeClassName="nav-bar" to="/" exact>Home</NavLink>
       <NavLink activeClassName="nav-bar" to="/about">About</NavLink>

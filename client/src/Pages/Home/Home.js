@@ -8,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -16,7 +15,7 @@ import Link from '@material-ui/core/Link';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="left">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
@@ -71,12 +70,19 @@ export default function Album() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Album layout
+              Social Fixers
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc.
-              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-              entirely.
+            <Typography variant="h5" align="left" color="textSecondary" paragraph>
+            Social Fixer for Facebook plugs into your browser and improves the existing Facebook.com web site. You get to pick which features you want to use:
+            <li>Hide Sponsored Posts</li>
+                <li>Auto-switch to the Most Recent news feed</li>
+                <li>Hide Politics!</li>
+                <li>Filter your news feed by keyword, author, and more</li>
+                <li>Friend Manager notifies you when you've been unfriended and more</li>
+                <li>Tabbed news feed organizes posts by games, apps, author</li>
+                <li>Hide parts of the page you don't want to see</li>
+                <li>Don't show posts again once you've read them</li>
+                <li>And much more! See the List of Features.</li>
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">

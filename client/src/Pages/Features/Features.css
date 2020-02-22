@@ -1,6 +1,6 @@
 .features-intro {
   text-align: center;
-  margin: 13%;
+  margin: 5%;
 }
 
 #features-h1 {
@@ -22,7 +22,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "content image";
-  gap: 30px;
+  gap: 25px;
 }
 .grid-feature:nth-child(even) {
   grid-template-areas: "image content";
@@ -32,6 +32,7 @@
 }
 .grid-feature .content {
   grid-area: content;
+  padding-left: 20px;
 }
 
 .grid-feature .featured_image {

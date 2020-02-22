@@ -16,6 +16,13 @@
   margin: 0 10px;
   line-height: 70px;
 }
+.logo{
+  float: left;
+  color:blue !important;
+  font-size: 20px;
+  text-decoration: none;
+  padding-left: 10px;
+}
 
 .donate {
   text-decoration: none;
@@ -52,13 +59,16 @@
 }
 
 
-@media only screen and (max-width: 726px) {
+@media only screen and (max-width: 868px) {
  .nav label {
       display: block;
       cursor: pointer;
       width: 100%;
       float: unset;
   }
+  /* .logo{
+    display: none !important;
+  } */
  .nav .menu {
       text-align: center;
       width: 100%;

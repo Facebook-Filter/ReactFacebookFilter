@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './Features.css';
-// import Image1 from "../../assets/image/f-1.png";
+
+
 
 
 const Feature = props => {
@@ -11,7 +12,7 @@ const Feature = props => {
         <p>{props.value.description}</p>
       </div>
       <div className="featured_image">
-        <img src={props.value.image} className="f1-pic-size" alt="whatever" />
+        <img src={props.value.image} className="f1-pic-size" alt={props.value.image} />
       </div>
     </div>
   );
@@ -23,7 +24,7 @@ class Features extends Component {
     this.state = {
       features: [],
       title: "",
-      image: [],
+      image: '',
       description: ""
     };
   }
@@ -33,6 +34,7 @@ class Features extends Component {
       .then(res => res.json())
       .then(features => this.setState({ features }));
   }
+ 
 
   render() {
     return (

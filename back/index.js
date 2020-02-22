@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 const app = express();
 app.use(cors());
 const initializeDB = require("./db.js");
@@ -255,7 +257,10 @@ const start = async () => {
 
   app.get('/features', async (req, res) => {
     const features = await controller.getFeatures();
-    res.json(features);
+    const new_features = features.map(feature => {
+      return {...feature, image: `http://localhost:5000/uploads/${feature.image}`}
+    })
+    res.json(new_features);
   })
 
 
@@ -364,9 +369,79 @@ const start = async () => {
 
 }
 
+
+
+
+const storage = multer.diskStorage({
+  destination: "./public/uploads",
+  filename: function(req, file, cb) {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  }
+});
+
+//Initialize Upload
+const upload = multer({
+  storage: storage,
+  //set image size
+  limits: { fileSize: 3000000 },
+  //Specify type of files
+  fileFilter: function(req, file, cb) {
+    checkFileType(file, cb);
+  }
+}).single("myImage");
+
+//Check File
+function checkFileType(file, cb) {
+  //Allowed extensions
+  const filetypes = /jpeg|jpg|png|gif|svg/;
+  //check extensions
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  //check mime type
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb("Error : Images only!");
+  }
+}
+
+
+
+
+
+//public folder
+app.use(express.static("./public"));
+
+
+app.post("/upload", (req, res) => {
+  upload(req, res, err => {
+    if (err) {
+      res.render("index", {
+        msg: err
+      });
+    } else {
+      if (req.file === undefined) {
+        res.render("index", {
+          msg: "Error: No file selected!"
+        });
+      } else {
+        res.render("index", {
+          msg: "File uploaded!",
+          file: `uploads/${req.file.filename}`
+        });
+      }
+    }
+  });
+});
+
+
 start();
-
-
 app.listen(PORT, () =>
   console.log(`Server running at: http://localhost:${PORT}/`)
 );
+
+
