@@ -44,7 +44,7 @@ export default function Footer() {
     <div className={classes.root}>
       <CssBaseline />
       <footer className={classes.footer}>
-        <Container maxWidth="">
+        <Container >
           <Copyright />
         </Container>
       </footer>
