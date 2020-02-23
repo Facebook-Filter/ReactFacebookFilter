@@ -1,16 +1,46 @@
 import React, { Component } from "react";
-
+import { makeStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "./Faq.css";
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
+
 const Faqs = props => {
+  const classes = useStyles();
   return (
     <div className="Faq">
-      <div className="faq_question">
+       <div className={classes.root}>
+      <ExpansionPanel>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}> <div className="faq_question">
         <h3 className="faq question">{props.value.question}</h3>
-      </div>
-      <div className="faq_answer">
+      </div></Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+          <div className="faq_answer">
         <p className="faq answer">{props.value.answer}</p>
       </div>
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+    </div>
     </div>
   );
 };

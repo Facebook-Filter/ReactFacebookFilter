@@ -12,6 +12,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { NavLink } from "react-router-dom";
+import { HashLink } from 'react-router-hash-link';
+import Rating from 'material-ui-rating'
+
+import "./Home.css";
 
 function Copyright() {
   return (
@@ -58,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = [1, 2, 3];
 
 export default function Album() {
   const classes = useStyles();
@@ -68,11 +73,35 @@ export default function Album() {
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          <Container maxWidth="md">
+          <Grid container spacing={10} justify="left">
+          <Grid item >
+            <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom>
               Social Fixers
+              <Rating name="size-medium" value={5} defaultValue={5} size="medium" readOnly={true} />
+
+<div className={classes.heroButtons}>
+              <Grid container spacing={2} justify="center">
+                <Grid item>
+                <NavLink to='/download'>
+                  <Button variant="contained" color="primary">
+                    Download
+                  </Button>
+                  </NavLink>
+                </Grid>
+                <Grid item>
+                <HashLink to='/#review'>
+                  <Button variant="outlined" color="primary">
+                    Rate Us!
+                  </Button>
+                  </HashLink>
+                </Grid>
+              </Grid>
+            </div>
             </Typography>
-            <Typography variant="h5" align="left" color="textSecondary" paragraph>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+            <Typography variant="h6" align="left" color="textSecondary" paragraph>
             Social Fixer for Facebook plugs into your browser and improves the existing Facebook.com web site. You get to pick which features you want to use:
             <li>Hide Sponsored Posts</li>
                 <li>Auto-switch to the Most Recent news feed</li>
@@ -84,20 +113,9 @@ export default function Album() {
                 <li>Don't show posts again once you've read them</li>
                 <li>And much more! See the List of Features.</li>
             </Typography>
-            <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
-                  </Button>
-                </Grid>
-                <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
+            </Grid>
+            </Grid>
+           
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
@@ -113,25 +131,60 @@ export default function Album() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      Social Fixer
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      This extension melt rocks
                     </Typography>
                   </CardContent>
-                  <CardActions>
+                  {/* <CardActions>
                     <Button size="small" color="primary">
                       View
                     </Button>
                     <Button size="small" color="primary">
                       Edit
                     </Button>
-                  </CardActions>
+                  </CardActions> */}
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Container>
+        <div className="ContactUs" id="review">
+        <div className="container">
+          <form id="contact" action method="post">
+            <h3>Quick Review</h3>
+            <h4>Review us today, your review is important to us!</h4>
+            <fieldset>
+              <input
+                placeholder="Your Username"
+                type="text"
+                tabIndex={1}
+                required
+                autofocus
+              />
+            </fieldset>
+            <fieldset>
+              <textarea
+                placeholder="Type Your Review Here...."
+                tabIndex={5}
+                required
+                defaultValue={""}
+              />
+            </fieldset>
+            <fieldset>
+              <button
+                name="submit"
+                type="submit"
+                id="contact-submit"
+                data-submit="...Sending"
+              >
+                Submit
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
       </main>
 
     </React.Fragment>
