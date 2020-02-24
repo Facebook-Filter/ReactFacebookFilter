@@ -95,7 +95,7 @@ a  {
 }
 
 div.Rating-root-150 {
-  padding-left: 80px;
+  padding-left: 100px;
 }
 
 .ContactUs .container {
@@ -208,4 +208,10 @@ div.Rating-root-150 {
 }
 .ContactUs :-ms-input-placeholder {
   color: #888;
+}
+
+
+
+.MuiCardMedia-root {
+background-size: unset !important;
 }

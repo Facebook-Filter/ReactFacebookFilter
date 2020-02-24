@@ -392,6 +392,29 @@ const initializeDB = async () => {
     };
 
 
+    const faqSearch = async (question) => {
+
+        let stmt = '';
+        if (question) {
+            stmt = `SELECT * FROM faqs WHERE question LIKE '%${question}%'`;
+        }
+
+        else {
+            throw new Error('sorry gaby');
+        }
+        try {
+            const faqSearch = await db.all(stmt);
+            console.log(faqSearch);
+           
+            return faqSearch;
+        }
+        catch (err) {
+            console.log(err.message);
+            throw new Error(`Error question do not match ${question} `)
+        }
+    }
+
+
 
 
     const controller = {
@@ -420,7 +443,8 @@ const initializeDB = async () => {
         getBlog,
         addBlog,
         updateBlog,
-        deleteBlog
+        deleteBlog,
+        faqSearch
     }
     return controller;
 }

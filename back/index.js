@@ -367,6 +367,19 @@ const start = async () => {
     }
   });
 
+
+app.get("/support/search", async (req, res, next) => {
+
+  const {question} = req.query;
+
+  try {const result = await controller.faqSearch(question);
+    res.json({ success: true, result });
+  } catch (err) {
+    next(err);
+  }
+})
+
+
 }
 
 
@@ -437,6 +450,8 @@ app.post("/upload", (req, res) => {
     }
   });
 });
+
+
 
 
 start();

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import "./Blog.css";
 
 const Blogs = props => {
   return (
-    <div className="Blog">
+    <div className="blog">
       <div className="title_blog">
         <h2>{props.value.title}</h2>
       </div>

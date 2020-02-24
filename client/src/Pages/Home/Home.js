@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,7 +14,9 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { NavLink } from "react-router-dom";
 import { HashLink } from 'react-router-hash-link';
-import Rating from 'material-ui-rating'
+import Rating from 'material-ui-rating';
+import image1 from '../../images/popular.png';
+import image2 from '../../images/safe.png';
 
 import "./Home.css";
 
@@ -50,9 +52,10 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    width:"250px"
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '100%', // 16:9
   },
   cardContent: {
     flexGrow: 1,
@@ -60,10 +63,10 @@ const useStyles = makeStyles(theme => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
-  },
+  }
 }));
 
-const cards = [1, 2, 3];
+
 
 export default function Album() {
   const classes = useStyles();
@@ -121,33 +124,42 @@ export default function Album() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image={image1}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Social Fixer
+                    Safe and Popular
                     </Typography>
                     <Typography>
-                      This extension melt rocks
+                    Built by a well-known and trusted javascript/social media expert. With well over a million downloads, it's one of the most popular Facebook extensions available.
                     </Typography>
                   </CardContent>
-                  {/* <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
-                    </Button>
-                  </CardActions> */}
                 </Card>
               </Grid>
-            ))}
+
+              <Grid item xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={image2}
+                    title="Image title"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                    Privacy & Security Guaranteed
+                    </Typography>
+                    <Typography>
+                    No personal data is ever sent or recorded. Never posts anything to FB. No ads or spyware, and it's easily removed if you wish. Recommended by Facecrooks and other user advocates.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            
           </Grid>
         </Container>
         <div className="ContactUs" id="review">
