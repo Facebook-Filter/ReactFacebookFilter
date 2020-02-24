@@ -70,12 +70,12 @@ const initializeDB = async () => {
     }
 
     const addReview = async props => {
-        const { username, email, review } = props;
-        if (!props || !username || !email || !review) {
+        const { username, review } = props;
+        if (!props || !username || !review) {
             throw new Error('you must provide a username, email & review');
         }
         try {
-            const addReview = await db.run(`Insert into reviews (username, email, review) values ('${username}', '${email}', '${review}')`);
+            const addReview = await db.run(`Insert into reviews (username,review) values ('${username}','${review}')`);
             return addReview.stmt.lastID;
         }
         catch (err) {

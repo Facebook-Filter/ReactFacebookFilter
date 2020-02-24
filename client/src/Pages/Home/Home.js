@@ -17,8 +17,10 @@ import { HashLink } from 'react-router-hash-link';
 import Rating from 'material-ui-rating';
 import image1 from '../../images/popular.png';
 import image2 from '../../images/safe.png';
-
+import Review from './HomeComponents/Review'
 import "./Home.css";
+import ReviewForm from './HomeComponents/ReviewForm';
+
 
 function Copyright() {
   return (
@@ -100,6 +102,7 @@ export default function Album() {
                   </HashLink>
                 </Grid>
               </Grid>
+
             </div>
             </Typography>
             </Grid>
@@ -162,43 +165,11 @@ export default function Album() {
             
           </Grid>
         </Container>
-        <div className="ContactUs" id="review">
-        <div className="container">
-          <form id="contact" action method="post">
-            <h3>Quick Review</h3>
-            <h4>Review us today, your review is important to us!</h4>
-            <fieldset>
-              <input
-                placeholder="Your Username"
-                type="text"
-                tabIndex={1}
-                required
-                autofocus
-              />
-            </fieldset>
-            <fieldset>
-              <textarea
-                placeholder="Type Your Review Here...."
-                tabIndex={5}
-                required
-                defaultValue={""}
-              />
-            </fieldset>
-            <fieldset>
-              <button
-                name="submit"
-                type="submit"
-                id="contact-submit"
-                data-submit="...Sending"
-              >
-                Submit
-              </button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
       </main>
-
+      <div className="ContactUs" id="review">
+        <div className="container">
+        <ReviewForm />
+                 <Review/></div></div>
     </React.Fragment>
   );
 }

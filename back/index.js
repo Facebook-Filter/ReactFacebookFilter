@@ -67,13 +67,17 @@ const start = async () => {
     res.json(review);
   });
 
+  app.get("/home", async (req, res) => {
+    const review = await controller.getReviews();
+    res.json(review);
+  });
+
   app.get("/reviews/add", async (req, res) => {
     const username = req.query.username;
-    const email = req.query.email;
     const review = req.query.review;
 
     let errors = [];
-    if (username == "" || email == "" || review == '') {
+    if (username == "" || review == '') {
       errors.push({
         status: 403,
         error: true,
@@ -86,8 +90,8 @@ const start = async () => {
       res.json({ status: 403, error: true, message: errors });
     } else {
       try {
-        const addReview = await controller.addReview({ username, email, review });
-        res.json({ revID: addReview, username: username, email: email, review: review });
+        const addReview = await controller.addReview({ username, review });
+        res.json({ revID: addReview, username: username, review: review });
       } catch (e) {
         res.json({ status: 403, error: true, message: e.message });
       }

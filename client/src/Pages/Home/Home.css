@@ -99,7 +99,7 @@ div.Rating-root-150 {
 }
 
 .ContactUs .container {
-  max-width: 400px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -150,7 +150,7 @@ div.Rating-root-150 {
   border: 1px solid #ccc;
   background: #fff;
   margin: 0 0 5px;
-  padding: 10px;
+
 }
 
 .ContactUs #contact input[type="text"]:hover,
@@ -214,4 +214,10 @@ div.Rating-root-150 {
 
 .MuiCardMedia-root {
 background-size: unset !important;
+}
+
+
+.grid-review-form{
+  display: flex;
+  flex-direction: row;
 }
