@@ -1,0 +1,20 @@
+.search_div {
+text-align: center;
+
+}
+
+.search_bar {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 30px;
+    width: 80%;
+}
+
+.search_btn{
+    margin-top: 10px;
+    background-color:#4CAF50;
+    height: 40px;
+    width: 80px;
+    color: white;
+    font-size: 20px;
+}

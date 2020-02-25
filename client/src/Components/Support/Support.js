@@ -1,65 +1,74 @@
 import React, { Component } from "react";
 import './Support.css'
+import Search from "./Search";
+import QuestionForm from "./QuestionForm";
+
 class Support extends Component {
-  state = {
-		post: [],
-		allPosts: []
-  };
-  
+	constructor(props) {
+		super(props);
+		this.state = {
+			question: '',
+			questions: [],
+			isFormSubmited: false
+		}
 
-  async componentDidMount() {
-    fetch("/supports")
-      .then(res => res.json())
-      .then(support => this.setState({ support }));
-  }
+		this.onSearchSubmit = this.onSearchSubmit.bind(this)
+	}
 
-	_onKeyUp = e => {
-		// filter post list by title using onKeyUp function
-		const post = this.state.allPosts.filter(item =>
-			item.title.rendered.toLowerCase().includes(e.target.value.toLowerCase())
-		);
-		this.setState({ post });
-	};
+	handleChangeQuestion = (event) => {
+		const question = event.target.value;
+		this.setState({
+			question: question,
+			questions: [],
+			isFormSubmited: false
+		})
+	}
+
+	componentWillMount = () => {
+		this.setState({
+			initialItems: this.props.content,
+			items: this.props.content
+		})
+	}
+
+	async onSearchSubmit(event) {
+
+		event.preventDefault();
+		fetch(`/support/search?question=${this.state.question}`)
+			.then(res => res.json())
+			.then(data => {
+
+
+				this.setState({ questions: data.result, isFormSubmited: true })
+
+			});
+	}
+
 
 	render() {
+
 		return (
-			<div className="container">
-				<div className="search-outer">
-					<form
-						role="search"
-						method="get"
-						id="searchform"
-						className="searchform"
-						action=""
-					>
-						{/* input field activates onKeyUp function on state change */}
-						<input
-							type="search"
-							onChange={this._onKeyUp}
-							name="s"
-							id="s"
-							placeholder="Search"
-						/>
-						<button type="submit" id="searchsubmit">
-							<i className="fa fa-search" aria-hidden="true" />
-						</button>
-					</form>
-				</div>
-				<ul className="data-list">
-					{/* post items mapped in a list linked to onKeyUp function */}
-					{this.state.post.map((item, index) => (
-						<li className={"block-" + index}>
-							<a className="title" href={item.link}>
-								<h3>{item.title.rendered}</h3>
-							</a>
-							<a className="link" href={item.link}>
-							 
-							</a>
-						</li>
-					))}
-				</ul>
+			<><div className="search_comp">
+				<Search content={this.state.question} onSearchSubmit={this.onSearchSubmit} handleChangeQuestion={this.handleChangeQuestion} />
+				{
+					this.state.question !== '' ? (
+						this.state.questions.length === 0 ? (this.state.isFormSubmited ? <QuestionForm /> : 'Provide a Question') : this.state.questions.map(item => {
+							return <div key={item.faqID}>
+								<h3>{item.question}</h3>
+								<p>{item.answer}</p>
+							</div>
+						})
+					) : 'Provide a Question'
+				}
+
+
 			</div>
+			</>
 		);
 	}
 }
 export default Support;
+
+
+
+

@@ -414,6 +414,39 @@ const initializeDB = async () => {
         }
     }
 
+    const getUserReviews = async () => {
+        const review = await db.all('Select * from app_reviews');
+        return review;
+    }
+
+    const addUserReviews = async props => {
+        const { username, review } = props;
+        if (!props || !username || !review) {
+            throw new Error('you must provide a username, email & review');
+        }
+        try {
+            const addUserReview = await db.run(`Insert into app_reviews (username,review) values ('${username}','${review}')`);
+            return addUserReview.stmt.lastID;
+        }
+        catch (err) {
+            err.message;
+            console.log(err.message);
+            throw new Error('Could not add review');
+        }
+    };
+
+
+    const deleteUserReviews = async (appRevID) => {
+        try {
+            const deleteUserReview = await db.run(`Delete from app_reviews where appRevID =${appRevID}`);
+            return deleteUserReview;
+        }
+        catch (err) {
+            err.message;
+            throw new Error(`Review with id ${appRevID} does not exist`);
+        }
+    };
+
 
 
 
@@ -444,7 +477,11 @@ const initializeDB = async () => {
         addBlog,
         updateBlog,
         deleteBlog,
-        faqSearch
+        faqSearch,
+        getUserReviews,
+        addUserReviews,
+        deleteUserReviews
+
     }
     return controller;
 }

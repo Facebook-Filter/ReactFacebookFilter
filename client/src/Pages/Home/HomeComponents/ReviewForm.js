@@ -35,7 +35,7 @@ class ReviewForm extends React.Component{
         }
     
         fetch(
-          `/reviews/add?id=${this.state.id}&username=${this.state.username}&review=${this.state.review}`
+          `/home/reviews/add?appRevID=${this.state.appRevID}&username=${this.state.username}&review=${this.state.review}`
         )
           .then(res => res.json())
           .then(reviews => {

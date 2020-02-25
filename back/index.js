@@ -72,6 +72,48 @@ const start = async () => {
     res.json(review);
   });
 
+  app.get("/home/reviews", async (req, res) => {
+    const review = await controller.getUserReviews();
+    res.json(review);
+  });
+
+  app.get("/home/reviews/add", async (req, res) => {
+    const username = req.query.username;
+    const review = req.query.review;
+
+    let errors = [];
+    if (username == "" || review == '') {
+      errors.push({
+        status: 403,
+        error: true,
+        message:
+          "you cannot create a review without providing a username, email and review"
+      });
+    }
+
+    if (errors.length > 0) {
+      res.json({ status: 403, error: true, message: errors });
+    } else {
+      try {
+        const addUserReview = await controller.addUserReviews({ username, review });
+        res.json({ appRevID: addUserReview, username: username, review: review });
+      } catch (e) {
+        res.json({ status: 403, error: true, message: e.message });
+      }
+    }
+  });
+
+  app.get("/home/reviews/delete/:appRevID", async (req, res) => {
+    const appRevID = req.params.appRevID;
+    try {
+      const deleteUserReview = await controller.deleteUserReviews(appRevID);
+      res.json({ deleteUserReview });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  });
+
+
   app.get("/reviews/add", async (req, res) => {
     const username = req.query.username;
     const review = req.query.review;
