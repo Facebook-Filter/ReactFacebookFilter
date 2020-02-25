@@ -1,9 +1,15 @@
 const express = require("express");
 const cors = require("cors");
+const bodyparser = require("body-parser");
 const app = express();
+const AuthenticationController = require("./AuthenticationController");
+const LoginMiddleware = require("./loginmiddleware");
 app.use(cors());
+app.use(bodyparser.json());
+app.use(express.urlencoded({ extended: true }));
 const initializeDB = require("./db.js");
 const PORT = 5000;
+
 
 
 const start = async () => {
@@ -359,6 +365,27 @@ const start = async () => {
       res.json({ updateBlog });
     } catch (e) {
       res.json({ status: 403, error: true, message: e.message });
+    }
+  });
+
+  app.post("/login", async (req, res) => {
+    const userCredentials = {
+      username: req.body.username,
+      password: req.body.password
+    }
+    const controller = new AuthenticationController();
+    const login = new LoginMiddleware(userCredentials);
+    try {
+      const token = await login.loginUser(controller);
+      res.json({
+        jwt: token,
+        status: 200
+      })
+    } catch (error) {
+      res.json({
+        message: error.message,
+        status: 404
+      })
     }
   });
 
