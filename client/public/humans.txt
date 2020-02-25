@@ -1,0 +1,17 @@
+/* TEAM */
+    BRAT Designz
+    
+    Project Manager: Rudy C
+
+    Programmers & Designers:
+    Abdukader F
+    Bassem K
+    Rudy C
+    Tina M
+
+/* THANKS */
+    Mentors: Gaby Karam
+             Samar FM
+             Omar O
+             
+    Guidance: Gaby Karam
