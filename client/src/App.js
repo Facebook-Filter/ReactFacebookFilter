@@ -30,6 +30,7 @@ import './admin/Dashboard/Dashboard.css';
 // import './index-2.css';
 
 class App extends Component {
+
   render() {
     return (
       <Router>
@@ -50,9 +51,10 @@ class App extends Component {
 </div></Switch>
 
 <Switch>
-            <Route path="/" strict exact>
-              <Nav  />
+            
               <div className="app_container">
+              <Route path="/" >
+              <Nav  />
                 <Route path="/" strict exact component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/features" component={Features} />
@@ -63,8 +65,8 @@ class App extends Component {
                 <Route path="/download" component={Download} />
                 <Route path="/blog" component={Blog} />
                 <Footer />
-              </div>
-            </Route>
+            
+            </Route>  </div>
           </Switch>
         </div>
 

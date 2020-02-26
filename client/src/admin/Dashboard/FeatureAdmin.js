@@ -32,10 +32,7 @@ export default class FeatureAdmin extends React.Component {
   };
 
 
-
-  addFeature = (e) => {
-    e.preventDefault();
-  }
+ 
 
   deleteFeature(featID) {
     let arr = this.state.features;
@@ -168,7 +165,7 @@ export default class FeatureAdmin extends React.Component {
               {this.state.features.map((feature, index) => {
                 return (
                   <li key={index}>
-                    {feature.featID}- {feature.title} - {feature.description} - <img src={`http://localhost:5000/${feature.image}`} />
+                    {feature.featID}- {feature.title} / {feature.description} / <img src={`http://localhost:5000/${feature.image}`} />
                     <button type="button" onClick={() => this.deleteFeature(feature.featID)}>delete</button>
                     <button type="button" onClick={() => this.editFeature(feature.featID)}>edit</button>
                   </li>
