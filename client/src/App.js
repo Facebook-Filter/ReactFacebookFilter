@@ -12,6 +12,15 @@ import FAQ from "./Components/Faq/Faq";
 import Footer from "./Components/Footer/Footer";
 import Blog from "./Pages/Blog/Blog";
 import Home from "./Pages/Home/Home";
+import FeatureAdmin from './admin/Dashboard/FeatureAdmin';
+import NavAdmin from './admin/Dashboard/NavAdmin';
+import BlogAdmin from './admin/Dashboard/BlogAdmin';
+import SupportAdmin from './admin/Dashboard/SupportAdmin';
+import ContactAdmin from './admin/Dashboard/ContactAdmin';
+import ReviewAdmin from './admin/Dashboard/ReviewAdmin';
+import FaqAdmin from './admin/Dashboard/FaqAdmin';
+
+import './admin/Dashboard/Dashboard.css';
 
 
 // import Admin from "./admin/Admin";
@@ -26,10 +35,22 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
-            {/* <Route path="/admin">
-              <Admin />
-            </Route> */}
-            <Route path="/">
+          <div className="wrapper">
+        <Route path='/admin'>
+        <NavAdmin/>
+  <Route path="/admin/feature" component={FeatureAdmin} />
+  <Route path="/admin/blog" component={BlogAdmin} />
+  <Route path="/admin/faq" component={FaqAdmin} />
+  <Route path="/admin/support" component={SupportAdmin} />
+  <Route path="/admin/review" component={ReviewAdmin} />
+  <Route path="/admin/contactus" component={ContactAdmin} />
+ 
+  </Route>
+  
+</div></Switch>
+
+<Switch>
+            <Route path="/" strict exact>
               <Nav  />
               <div className="app_container">
                 <Route path="/" strict exact component={Home} />
@@ -46,6 +67,9 @@ class App extends Component {
             </Route>
           </Switch>
         </div>
+
+      
+
       </Router>
     );
   }

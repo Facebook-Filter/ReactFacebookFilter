@@ -304,19 +304,20 @@ const start = async () => {
   app.get('/features', async (req, res) => {
     const features = await controller.getFeatures();
     const new_features = features.map(feature => {
-      return {...feature, image: `http://localhost:5000/uploads/${feature.image}`}
+      return {...feature, image: feature.image}
     })
     res.json(new_features);
+    console.log(new_features);
   })
-
+/
 
   app.get("/features/add", async (req, res) => {
     const title = req.query.title;
     const image = req.query.image;
     const description = req.query.description;
-
+ console.log(title, image, description)
     let errors = [];
-    if (title == "" || image == "" || description == "") {
+    if (title == "" || description == ""||image=="") {
       errors.push({
         status: 403,
         error: true,
@@ -326,13 +327,16 @@ const start = async () => {
     }
 
     if (errors.length > 0) {
+     
       res.json({ status: 403, error: true, message: errors });
     }
     else {
       try {
         const addFeature = await controller.addFeature({ title, image, description });
-        res.json({ featID: addFeature, title: title, image: image, description: description });
+        console.log(addFeature)
+        res.json({ featID: addFeature, title: title,  image: image, description: description });
       } catch (e) {
+        console.log("hello", e.message)
         res.json({ status: 403, error: true, message: e.message });
       }
     }
@@ -478,17 +482,21 @@ app.use(express.static("./public"));
 
 app.post("/upload", (req, res) => {
   upload(req, res, err => {
+    console.log(err)
     if (err) {
-      res.render("index", {
+      res.json( {
+        success: false,
         msg: err
       });
     } else {
       if (req.file === undefined) {
-        res.render("index", {
+        res.json( {
+          success: false,
           msg: "Error: No file selected!"
         });
       } else {
-        res.render("index", {
+        res.json( {
+          success: true,
           msg: "File uploaded!",
           file: `uploads/${req.file.filename}`
         });
@@ -496,6 +504,7 @@ app.post("/upload", (req, res) => {
     }
   });
 });
+
 
 
 

@@ -263,17 +263,20 @@ const initializeDB = async () => {
     }
 
     const addFeature = async props => {
+        console.log("HHHHHHHHHHH")
         const { title, image, description } = props;
         if (!props || !title || !image || !description) {
             throw new Error('you must provide a title, foran image and a description');
         }
         try {
+            console.log(title, image, description, "hon")
             const addFeature = await db.run(`Insert into features (title, image, description) values ('${title}', '${image}', '${description}')`);
+            console.log(addFeature.stmt.lastID)
             return addFeature.stmt.lastID;
         }
         catch (err) {
-            err.message;
-            console.log({ title, image, description });
+          // console.log("hererrereer",err.message) ;
+           // console.log({ title, image, description });
             throw new Error(err.message);
         }
     };
@@ -283,7 +286,7 @@ const initializeDB = async () => {
 
         let stmt = '';
         if (title && image && description) {
-            stmt = `Update features set title='${title}', image='${image}', description=${description} where featID= ${featID}`;
+            stmt = `Update features set title='${title}', image='${image}', description='${description}' where featID= ${featID}`;
         }
         else if (title && !image && !description) {
             stmt = `Update features set title='${title}' where featID= ${featID}`;
@@ -308,6 +311,7 @@ const initializeDB = async () => {
         }
 
         try {
+            console.log(stmt)
             const updateFeature = await db.run(stmt);
             if (updateFeature.stmt.changes == 0) {
                 throw new Error(`Feature with id ${featID} does not exist`);
