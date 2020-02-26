@@ -61,23 +61,30 @@ export default class FeatureAdmin extends React.Component {
 
   updateFeature = async (e) => {
     e.preventDefault();
+    debugger;
     const file = e.target.myImage.files[0];
     console.log(file);
     const body = new FormData();
     body.append('myImage', file);
-    
+
+    const response = await fetch("http://localhost:5000/upload", {
+      method: 'POST',
+      body: body
+    });
+
+    const result = await response.json();
+    console.log("result", result.file)
+
+
     const res = await fetch(
-      `/features/update/${this.state.editingIndex}?title=${this.state.title}&image=${this.state.image}&description=${this.state.description}`, {
-        method: 'POST',
-        body: body
-      }
+      `/features/update/${this.state.editingIndex}?title=${this.state.title}&image=${result.file}&description=${this.state.description}`
     );
     const features = await res.json();
 
     this.setState({
       features: this.state.features.map(feature =>
         feature.featID === this.state.editingIndex
-          ? { ...feature, title: this.state.title, description: this.state.description, image: this.state.image }
+          ? { ...feature, title: this.state.title, description: this.state.description, image: result.file }
           : feature
       ),
       editing: false,
