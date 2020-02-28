@@ -5,12 +5,33 @@ import "./AppAdmin.css";
 import Login from './Login/Login.js';
 
 class Appadmin extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			loggedIn: false,
+		};
+	}
+
+	async componentDidMount() {
+		const response = await fetch(`http://localhost:5000/verify?token=${localStorage.getItem('token')}`);
+		const result = await response.json();
+		if (result.status === 200) {
+			this.setState({
+				loggedIn: true
+			})
+		}
+	}
+
 	render() {
 		return (
-			<> 
-		<Route path="/admin"  exact component={Login} />
-		<Route path="/admin/Dashboard" strict exact component={Dashboard} /> 
-		</>
+			<>
+				{
+					this.state.loggedIn ? (
+						<Route path="/admin" strict exact component={Dashboard} />
+
+					) : <Route path="/admin" component={Login} />
+				}
+			</>
 		)
 	}
 }
