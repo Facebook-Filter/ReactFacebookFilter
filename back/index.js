@@ -4,6 +4,8 @@ const bodyparser = require("body-parser");
 const app = express();
 const AuthenticationController = require("./AuthenticationController");
 const LoginMiddleware = require("./loginmiddleware");
+const jsonWebToken = require('jsonwebtoken')
+const jwt_secret = require('../Private').key
 app.use(cors());
 app.use(bodyparser.json());
 app.use(express.urlencoded({ extended: true }));
@@ -11,6 +13,25 @@ const initializeDB = require("./db.js");
 const PORT = 5000;
 
 
+const checkAuth = (req, res, next) => {
+  try {
+    let token = '';
+    if (req.body.token) {
+      token = req.body.token;
+    } else if (req.query.token) {
+      token = req.query.token
+    }
+    const tokenDecodedData = jsonWebToken.verify(token, jwt_secret); 4
+    console.log('tokenDecodedData')
+    next();
+  } catch (error) {
+    console.log(error.message)
+    res.json({
+      error: true,
+      data: error
+    });
+  }
+}
 
 const start = async () => {
   const controller = await initializeDB();
@@ -315,9 +336,11 @@ const start = async () => {
   });
 
 
-  app.get('/blog', async (req, res) => {
+  app.get('/blog', checkAuth, async (req, res) => {
     const blog = await controller.getBlog();
-    res.json(blog);
+    res.json({
+      data: blog
+    });
   })
 
 
@@ -369,6 +392,7 @@ const start = async () => {
   });
 
   app.post("/login", async (req, res) => {
+    console.log(req.body)
     const userCredentials = {
       username: req.body.username,
       password: req.body.password
@@ -391,6 +415,13 @@ const start = async () => {
 
 }
 
+app.get('/verify', checkAuth, (req, res, next) => {
+
+  res.json({
+    status: 200,
+
+  })
+})
 start();
 
 
