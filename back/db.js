@@ -85,7 +85,6 @@ const initializeDB = async () => {
         }
     };
 
-
     const deleteReview = async (revID) => {
         try {
             const deleteReview = await db.run(`Delete from reviews where revID =${revID}`);
@@ -96,7 +95,6 @@ const initializeDB = async () => {
             throw new Error(`Review with id ${revID} does not exist`);
         }
     };
-
 
     const getFaq = async () => {
         const faq = await db.all('Select * from faqs');
@@ -159,7 +157,6 @@ const initializeDB = async () => {
         }
     };
 
-
     const getSupport = async () => {
         const support = await db.all('Select * from supports');
         return support;
@@ -220,7 +217,6 @@ const initializeDB = async () => {
         }
     };
 
-
     const getContacts = async () => {
         const contacts = await db.all('Select * from contacts');
         return contacts;
@@ -241,7 +237,6 @@ const initializeDB = async () => {
             throw new Error('Could not add contact');
         }
     };
-
 
     const deleteContacts = async (contID) => {
         try {
@@ -275,8 +270,8 @@ const initializeDB = async () => {
             return addFeature.stmt.lastID;
         }
         catch (err) {
-          // console.log("hererrereer",err.message) ;
-           // console.log({ title, image, description });
+            // console.log("hererrereer",err.message) ;
+            // console.log({ title, image, description });
             throw new Error(err.message);
         }
     };
@@ -409,7 +404,7 @@ const initializeDB = async () => {
         try {
             const faqSearch = await db.all(stmt);
             console.log(faqSearch);
-           
+
             return faqSearch;
         }
         catch (err) {
@@ -452,7 +447,34 @@ const initializeDB = async () => {
     };
 
 
+    const updateReview = async (revID, props) => {
+        const { username, review } = props;
 
+        let stmt = '';
+        if (username && review) {
+            stmt = `update reviews set username='${username}', review='${review}' where revID= ${revID}`;
+        }
+        else if (username && !review) {
+            stmt = `update reviews set username='${username}' where revID= ${revID}`;
+        }
+        else if (!username && review) {
+            stmt = `update reviews set username='${username}' where revID= ${revID}`;
+        }
+        else {
+            throw new Error('you must provide an username or review for the review');
+        }
+
+        try {
+            const updateReview = await db.run(stmt);
+            if (updateReview.stmt.changes == 0) {
+                throw new Error(`review with id ${revID} does not exist`);
+            }
+            return true;
+        }
+        catch (err) {
+            throw new Error(`Could not update review with id ${revID}` + err);
+        }
+    };
 
     const controller = {
         getReviews,
@@ -484,11 +506,11 @@ const initializeDB = async () => {
         faqSearch,
         getUserReviews,
         addUserReviews,
-        deleteUserReviews
+        deleteUserReviews,
+        updateReview
 
     }
     return controller;
 }
-
 
 module.exports = initializeDB;

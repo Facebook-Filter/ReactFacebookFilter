@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default class SupportAdmin extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,6 @@ export default class SupportAdmin extends React.Component {
       );
   }
 
-
   email = e => {
     e.preventDefault();
     this.setState({ email: e.target.value });
@@ -30,7 +28,6 @@ export default class SupportAdmin extends React.Component {
     e.preventDefault();
     this.setState({ question: e.target.value });
   };
-
 
   deleteSupport(questID) {
     let arr = this.state.supports;
@@ -55,7 +52,7 @@ export default class SupportAdmin extends React.Component {
 
   updateSupport = async (e) => {
     e.preventDefault();
- 
+
     const res = await fetch(
       `/support/update/${this.state.editingIndex}?email=${this.state.email}&question=${this.state.question}`
     );
@@ -64,7 +61,7 @@ export default class SupportAdmin extends React.Component {
     this.setState({
       supports: this.state.supports.map(support =>
         support.questID === this.state.editingIndex
-          ? { ...support, email: this.state.email, question: this.state.question}
+          ? { ...support, email: this.state.email, question: this.state.question }
           : support
       ),
       editing: false,
@@ -72,7 +69,6 @@ export default class SupportAdmin extends React.Component {
       question: ""
     });
   };
-
 
   onSubmit = async (e) => {
     e.preventDefault();
@@ -91,18 +87,14 @@ export default class SupportAdmin extends React.Component {
         newList.push(supports);
         this.setState({ supports: newList, email: "", question: "" });
       });
-
   }
-
 
   render() {
     return (
       <main>
-
         <h1>Faqs List</h1>
         <div className="flex-grid">
           <div>
-
             <form
               onSubmit={e => {
                 this.state.editing ? this.updateSupport(e) : this.onSubmit(e)
@@ -123,10 +115,7 @@ export default class SupportAdmin extends React.Component {
                   type="submit"
                   value={this.state.editing ? "Update" : "Add"}
                 />
-
-
               </h2>
-
             </form>
             <ul>
               {this.state.supports.map((support, index) => {
@@ -136,15 +125,10 @@ export default class SupportAdmin extends React.Component {
                     <button type="button" onClick={() => this.deleteSupport(support.questID)}>delete</button>
                     <button type="button" onClick={() => this.editSupport(support.questID)}>edit</button>
                   </li>
-
                 );
               })}
             </ul></div></div>
-
-
       </main>
     )
   }
 }
-
-

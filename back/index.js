@@ -3,10 +3,38 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const app = express();
+const AuthenticationController = require("./AuthenticationController");
+const LoginMiddleware = require("./loginmiddleware");
+const jsonWebToken = require('jsonwebtoken')
+const jwt_secret = require('../Private').key
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+const bodyparser= require('body-parser');
+app.use(bodyparser.json());
 const initializeDB = require("./db.js");
 const PORT = 5000;
 
+
+
+const checkAuth = (req, res, next) => {
+  try {
+    let token = '';
+    if (req.body.token) {
+      token = req.body.token;
+    } else if (req.query.token) {
+      token = req.query.token
+    }
+    const tokenDecodedData = jsonWebToken.verify(token, jwt_secret);
+    console.log('tokenDecodedData')
+    next();
+  } catch (error) {
+    console.log(error.message)
+    res.json({
+      error: true,
+      data: error
+    });
+  }
+}
 
 const start = async () => {
   const controller = await initializeDB();
@@ -67,6 +95,17 @@ const start = async () => {
     res.json(review);
   });
 
+  app.get("/reviews/update/:revID", async (req, res) => {
+    const revID = req.params.revID;
+    const { username, review } = req.query;
+    try {
+      const updateReview = await controller.updateReview(revID, { username, review });
+      res.json({ updateReview });
+    } catch (e) {
+      res.json({ status: 403, error: true, message: e.message });
+    }
+  });
+
   app.get("/home", async (req, res) => {
     const review = await controller.getReviews();
     res.json(review);
@@ -112,7 +151,6 @@ const start = async () => {
       res.json({ status: 403, error: true, message: e.message });
     }
   });
-
 
   app.get("/reviews/add", async (req, res) => {
     const username = req.query.username;
@@ -206,7 +244,6 @@ const start = async () => {
     res.json(support);
   })
 
-
   app.get("/support/add", async (req, res) => {
     const email = req.query.email;
     const question = req.query.question;
@@ -253,10 +290,6 @@ const start = async () => {
     }
   });
 
-
-
-
-
   app.get("/contacts", async (req, res) => {
     const contacts = await controller.getContacts();
     res.json(contacts);
@@ -299,25 +332,22 @@ const start = async () => {
     }
   });
 
-
-
   app.get('/features', async (req, res) => {
     const features = await controller.getFeatures();
     const new_features = features.map(feature => {
-      return {...feature, image: feature.image}
+      return { ...feature, image: feature.image }
     })
     res.json(new_features);
     console.log(new_features);
   })
-/
 
   app.get("/features/add", async (req, res) => {
     const title = req.query.title;
     const image = req.query.image;
     const description = req.query.description;
- console.log(title, image, description)
+    console.log(title, image, description)
     let errors = [];
-    if (title == "" || description == ""||image=="") {
+    if (title == "" || description == "" || image == "") {
       errors.push({
         status: 403,
         error: true,
@@ -327,14 +357,14 @@ const start = async () => {
     }
 
     if (errors.length > 0) {
-     
+
       res.json({ status: 403, error: true, message: errors });
     }
     else {
       try {
         const addFeature = await controller.addFeature({ title, image, description });
         console.log(addFeature)
-        res.json({ featID: addFeature, title: title,  image: image, description: description });
+        res.json({ featID: addFeature, title: title, image: image, description: description });
       } catch (e) {
         console.log("hello", e.message)
         res.json({ status: 403, error: true, message: e.message });
@@ -363,12 +393,10 @@ const start = async () => {
     }
   });
 
-
   app.get('/blog', async (req, res) => {
     const blog = await controller.getBlog();
     res.json(blog);
   })
-
 
   app.get("/blog/add", async (req, res) => {
     const title = req.query.title;
@@ -417,27 +445,46 @@ const start = async () => {
     }
   });
 
+  app.get("/support/search", async (req, res, next) => {
 
-app.get("/support/search", async (req, res, next) => {
+    const { question } = req.query;
 
-  const {question} = req.query;
+    try {
+      const result = await controller.faqSearch(question);
+      res.json({ success: true, result });
+    } catch (err) {
+      next(err);
+    }
+  })
 
-  try {const result = await controller.faqSearch(question);
-    res.json({ success: true, result });
-  } catch (err) {
-    next(err);
-  }
-})
+  app.post("/login", async (req, res) => {
+    console.log(req.body)
+    const userCredentials = {
+      username: req.body.username,
+      password: req.body.password
+    }
+    const controller = new AuthenticationController();
+    const login = new LoginMiddleware(userCredentials);
+    try {
+      const token = await login.loginUser(controller);
+      res.json({
+        jwt: token,
+        status: 200
+      })
+    } catch (error) {
+      res.json({
+        message: error.message,
+        status: 404
+      })
+    }
+  });
 
 
 }
 
-
-
-
 const storage = multer.diskStorage({
   destination: "./public/uploads",
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     cb(
       null,
       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
@@ -451,7 +498,7 @@ const upload = multer({
   //set image size
   limits: { fileSize: 3000000 },
   //Specify type of files
-  fileFilter: function(req, file, cb) {
+  fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   }
 }).single("myImage");
@@ -472,30 +519,25 @@ function checkFileType(file, cb) {
   }
 }
 
-
-
-
-
 //public folder
 app.use(express.static("./public"));
-
 
 app.post("/upload", (req, res) => {
   upload(req, res, err => {
     console.log(err)
     if (err) {
-      res.json( {
+      res.json({
         success: false,
         msg: err
       });
     } else {
       if (req.file === undefined) {
-        res.json( {
+        res.json({
           success: false,
           msg: "Error: No file selected!"
         });
       } else {
-        res.json( {
+        res.json({
           success: true,
           msg: "File uploaded!",
           file: `uploads/${req.file.filename}`
@@ -505,13 +547,15 @@ app.post("/upload", (req, res) => {
   });
 });
 
+app.get('/verify', checkAuth, (req, res, next) => {
 
+  res.json({
+    status: 200,
 
-
+  })
+})
 
 start();
 app.listen(PORT, () =>
   console.log(`Server running at: http://localhost:${PORT}/`)
 );
-
-

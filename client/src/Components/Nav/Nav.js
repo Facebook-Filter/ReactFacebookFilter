@@ -1,15 +1,12 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-// import DrawerToggleButton from "../DrawerToggleButton/DrawerToggleButton";
 import "./Nav.css";
-
 
 const Nav = props => (
   <div className="nav">
     <Link className="logo" to='/'>Social Fixers</Link>
     <label htmlFor="toggle" className="toogle_label">☰</label>
     <input type="checkbox" id="toggle" />
-  
     <div className="menu">
       <NavLink activeClassName="nav-bar" to="/" exact>Home</NavLink>
       <NavLink activeClassName="nav-bar" to="/about">About</NavLink>
@@ -22,9 +19,5 @@ const Nav = props => (
       <NavLink activeClassName="nav-bar" to="/donate"><button class= "donate">Donate</button></NavLink>
     </div>
   </div>
-
-
-
 );
-
 export default Nav;

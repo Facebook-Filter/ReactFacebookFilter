@@ -127,10 +127,12 @@ export default class FeatureAdmin extends React.Component {
 
   render() {
     return (
+      
       <main>
-
+          
         <h1>Features List</h1>
         <div className="flex-grid">
+         
           <div>
 
             <form

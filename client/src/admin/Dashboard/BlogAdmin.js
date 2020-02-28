@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export default class BlogAdmin extends React.Component {
   constructor(props) {
     super(props);
@@ -20,8 +19,6 @@ export default class BlogAdmin extends React.Component {
         this.setState({ blogs }, () => console.log("users fetched..", blogs))
       );
   }
-
-
   title = e => {
     e.preventDefault();
     this.setState({ title: e.target.value });
@@ -30,8 +27,6 @@ export default class BlogAdmin extends React.Component {
     e.preventDefault();
     this.setState({ blogText: e.target.value });
   };
-
-
   deleteBlog(blogID) {
     let arr = this.state.blogs;
     const result = arr.filter(blog => blog.blogID !== blogID);
@@ -55,7 +50,7 @@ export default class BlogAdmin extends React.Component {
 
   updateBlog = async (e) => {
     e.preventDefault();
- 
+
     const res = await fetch(
       `/blog/update/${this.state.editingIndex}?title=${this.state.title}&blogText=${this.state.blogText}`
     );
@@ -64,7 +59,7 @@ export default class BlogAdmin extends React.Component {
     this.setState({
       blogs: this.state.blogs.map(blog =>
         blog.blogID === this.state.editingIndex
-          ? { ...blog, title: this.state.title, blogText: this.state.blogText}
+          ? { ...blog, title: this.state.title, blogText: this.state.blogText }
           : blog
       ),
       editing: false,
@@ -72,7 +67,6 @@ export default class BlogAdmin extends React.Component {
       blogText: ""
     });
   };
-
 
   onSubmit = async (e) => {
     e.preventDefault();
@@ -91,9 +85,7 @@ export default class BlogAdmin extends React.Component {
         newList.push(blogs);
         this.setState({ blogs: newList, title: "", blogText: "" });
       });
-
   }
-
 
   render() {
     return (
@@ -123,10 +115,7 @@ export default class BlogAdmin extends React.Component {
                   type="submit"
                   value={this.state.editing ? "Update" : "Add"}
                 />
-
-
               </h2>
-
             </form>
             <ul>
               {this.state.blogs.map((blog, index) => {
@@ -140,11 +129,7 @@ export default class BlogAdmin extends React.Component {
                 );
               })}
             </ul></div></div>
-
-
       </main>
     )
   }
 }
-
-
