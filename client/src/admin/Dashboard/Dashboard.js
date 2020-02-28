@@ -50,6 +50,11 @@ class Dashboard extends Component {
 		}
 	};
 
+	handleLogout() {
+		localStorage.removeItem('token');
+		window.location.reload();
+	}
+
 	toggleMode(mode) {
 		if (mode === "editMode") {
 			this.setState({
@@ -93,11 +98,11 @@ class Dashboard extends Component {
 		this.toggleMode("listMode");
 	};
 
-	updateOption = (id, props) => {};
+	updateOption = (id, props) => { };
 
-	deleteFeature = image => {};
+	deleteFeature = image => { };
 
-	addFeature = image => {};
+	addFeature = image => { };
 
 	renderEditMode() {
 		return (
@@ -219,6 +224,7 @@ class Dashboard extends Component {
 						})}
 					</tbody>
 				</table>
+				<button onClick={() => this.handleLogout()}>Log out</button>
 			</div>
 		);
 	}
